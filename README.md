@@ -30,3 +30,9 @@ Les `string_cat` peuvent avoir trois valeurs :
 - no
 - unsure
 - no data
+
+# Librairies 
+
+Liste des librairies utilisées pour la réalisation du site :
+- [Bootstrap](https://getbootstrap.net/)
+- [DataTables](https://datatables.net/)
