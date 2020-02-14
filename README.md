@@ -18,9 +18,10 @@ Les fichiers JSON sont nommés tel que `STR_espace_vert.json`, soit
 
 |  Champ |  Type |  Remarque |
 |---|---|---|
-|  annee | `int`  |  ex : 2011 |
+|  annee | `int`  |  Année de la mise à jour la récente |
 |  lieu  |  `string` | Ville concernée par les données |
 |  categorie |  `string_cat` |  Sujet sur lequel portent les données |
+|  id |  `string` |  Identifiant du fichier, strictement égale à son nom : si le fichier s'appelle "STR_espace_vert.json", son identifiant est "STR_espace_vert" |
 |  data_loc |  `string` |  Adresse où sont disponibles les données |
 |  is_open_licenced |  ``string_state`` |  Si la licene des données est ouverte |
 | is_free  | `string_state`  |  Si l'accès au donnée est gratuit |
