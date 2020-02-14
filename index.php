@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Datacity - Accueil</title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="/nantarbourg/libs/bootstrap/css/bootstrap-grid.min.css"> -->
+    <link rel="stylesheet" href="./libs/bootstrap/css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="./libs/bootstrap/css/bootstrap.min.css">
+
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -22,7 +24,6 @@
     $content_repo = array_diff($content_repo, $hidden_items);
     ?>
 
-    <pre>
         <?php
             $total_tab = [];
             foreach ($content_repo as $tab_index => $JSON_file_name):
@@ -32,7 +33,8 @@
             $tab_categories = find_all_keys($total_tab, 'categorie');
             $tab_villes = find_all_keys($total_tab, 'lieu');
         ?>
-    </pre>
+
+<a tabindex="0" class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-trigger="focus" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">Dismissible popover</a>
 
     <h1>Data census France</h1>
 
@@ -53,7 +55,8 @@
                 <td>
                     <?php
                     $infos = find_infos($total_tab, $ville, $categorie);
-                    echo visualize_field($infos);
+                    echo visualize_field($infos)['HTML'];
+                    echo visualize_field($infos)['score'];
                     ?>
                 </td>
                 <?php endforeach; ?>
@@ -66,16 +69,20 @@
         <p>Créé par les étudiants de la licence professionnelle MIND de l'IUT Bordeaux Montaigne.</p>
     </footer>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-	    crossorigin="anonymous"></script>
+    <script src="./libs/jquery.min.js"></script>
+    <script src="./libs/popper.min.js"></script>
+    <script src="./libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="./libs/bootstrap/js/bootstrap.min.js"></script>
 
     <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 
     <script>
+        // dynamisation du tableau
         $(document).ready( function () {
             $('#tab').DataTable();
         });
+
+        $('[data-toggle="popover"]').popover({ trigger: "hover", html:true });
     </script>
 
 </body>

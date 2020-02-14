@@ -42,24 +42,42 @@ function find_infos($total_JSON_array, $ville, $categorie) {
 }
 
 function visualize_field($tab_infos) {
-    $html = '';
-    
+    $popover_content = 
+
+    $fields_view = '';
+    $popover_content = '';
+    $score = 0;
+
+    $i = 0;
+
+    $tab_fields = CSV_file_to_array('./fields.csv');
+
     foreach ($tab_infos as $tab_index => $value) {
         switch ($value) {
             case 'yes':
-                $html .= '<span class="field-color field-color--yes"></span>';
+                $fields_view .= '<span class="field-color field-color--yes"></span>';
+                $popover_content .= '<li>' . $tab_fields[$i] . ' : Oui</li>';
+                $score++;
                 break;
             case 'no':
-                $html .= '<span class="field-color field-color--no"></span>';
+                $fields_view .= '<span class="field-color field-color--no"></span>';
+                $popover_content .= '<li>' . $tab_fields[$i] . ' : Non</li>';
                 break;
             case 'unsure':
-                $html .= '<span class="field-color field-color--unsure"></span>';
+                $fields_view .= '<span class="field-color field-color--unsure"></span>';
+                $popover_content .= '<li>' . $tab_fields[$i] . ' : Incertain</li>';
                 break;
             case 'no_data':
-                $html .= '<span class="field-color field-color--no-data"></span>';
+                $fields_view .= '<span class="field-color field-color--no-data"></span>';
+                $popover_content .= '<li>' . $tab_fields[$i] . ' : Pas de données</li>';
                 break;
         }
+
+        $i++;
     }
 
-    return $html;
+    $html = '<div data-toggle="popover" data-trigger="hover" data-placement="bottom"
+    title="Statistiques" data-content="<ul>' . $popover_content . '</ul>">' . $fields_view . '</div>';
+
+    return ['HTML' => $html, 'score' => $score];
 }
