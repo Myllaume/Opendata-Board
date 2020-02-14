@@ -1,4 +1,11 @@
 <?php
+function get_all_file_names() {
+    $content_repo = scandir('./data/');
+    $hidden_items = array('.', '..', '.DS_Store');
+    $content_repo = array_diff($content_repo, $hidden_items);
+    return $content_repo ;
+}
+
 function JSON_file_to_array($JSON_file_path) {
     $json_file = file_get_contents($JSON_file_path);
     $json_file = json_decode($json_file, true);
@@ -27,11 +34,11 @@ function find_infos($total_JSON_array, $ville, $categorie) {
 
     $tab_infos = [];
 
-    $tab_fields = CSV_file_to_array('./fields.csv');
+    $all_fields = CSV_file_to_array('./fields.csv');
 
     $id_file = '';
 
-    foreach ($tab_fields as $field) {
+    foreach ($all_fields as $field) {
         foreach ($total_JSON_array as $tab_index => $value) {
 
             if ($value['categorie'] == $categorie && $value['lieu'] == $ville) {
@@ -47,32 +54,34 @@ function find_infos($total_JSON_array, $ville, $categorie) {
 
     $i = 0;
 
+    $all_fields_name = CSV_file_to_array('./fields_name.csv');
+
     foreach ($tab_infos as $tab_index => $value) {
         switch ($value) {
             case 'yes':
-                $fields_view .= '<span class="field-color field-color--yes"></span>';
-                $popover_content .= '<li>' . $tab_fields[$i] . ' : Oui</li>';
+                $fields_view .= '<span class=\'field-color field-color--yes\'></span>';
+                $popover_content .= '<li class=\'list-group-item list-group-item-success\'>' . $all_fields_name[$i] . ' : Oui</li>';
                 $score++;
                 break;
             case 'no':
-                $fields_view .= '<span class="field-color field-color--no"></span>';
-                $popover_content .= '<li>' . $tab_fields[$i] . ' : Non</li>';
+                $fields_view .= '<span class=\'field-color field-color--no\'></span>';
+                $popover_content .= '<li class=\'list-group-item list-group-item-danger\'>' . $all_fields_name[$i] . ' : Non</li>';
                 break;
             case 'unsure':
-                $fields_view .= '<span class="field-color field-color--unsure"></span>';
-                $popover_content .= '<li>' . $tab_fields[$i] . ' : Incertain</li>';
+                $fields_view .= '<span class=\'field-color field-color--unsure\'></span>';
+                $popover_content .= '<li class=\'list-group-item list-group-item-dark\'>' . $all_fields_name[$i] . ' : Incertain</li>';
                 break;
-            case 'no_data':
-                $fields_view .= '<span class="field-color field-color--no-data"></span>';
-                $popover_content .= '<li>' . $tab_fields[$i] . ' : Pas de données</li>';
+            case 'no data':
+                $fields_view .= '<span class=\'field-color field-color--no-data\'></span>';
+                $popover_content .= '<li class=\'list-group-item list-group-item-light\'>' . $all_fields_name[$i] . ' : Pas de données</li>';
                 break;
         }
 
         $i++;
     }
 
-    $html = '<a href="?view=' . $id_file . '"><div data-toggle="popover" data-trigger="hover" data-placement="bottom"
-    title="Statistiques" data-content="<ul>' . $popover_content . '</ul>">' . $fields_view . '</div></a>';
+    $html = '<a href="./view.php?view=' . $id_file . '"><div data-toggle="popover" data-trigger="hover" data-placement="bottom"
+    title="Statistiques" data-content="<ul class=\'list-group\'>' . $popover_content . '<ul>">' . $fields_view . '</div></a>';
 
     return ['HTML' => $html, 'score' => $score];
 }

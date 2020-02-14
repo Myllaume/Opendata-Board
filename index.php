@@ -1,3 +1,5 @@
+<?php include_once './functions.php'; ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -14,14 +16,10 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="p-2">
 
     <?php
-    include_once './functions.php';
-
-    $content_repo = scandir('./data/');
-    $hidden_items = array('.', '..', '.DS_Store');
-    $content_repo = array_diff($content_repo, $hidden_items);
+    $content_repo = get_all_file_names();
     
     $all_JSON_content = [];
     foreach ($content_repo as $tab_index => $JSON_file_name):
@@ -61,9 +59,7 @@
         </tbody>
     </table>
 
-    <footer>
-        <p>Créé par les étudiants de la licence professionnelle MIND de l'IUT Bordeaux Montaigne.</p>
-    </footer>
+    <?php include_once './include/footer.html' ?>
 
     <script src="./libs/jquery.min.js"></script>
     <script src="./libs/popper.min.js"></script>
