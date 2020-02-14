@@ -1,4 +1,11 @@
 <?php
+function get_all_file_names() {
+    $content_repo = scandir('./data/');
+    $hidden_items = array('.', '..', '.DS_Store');
+    $content_repo = array_diff($content_repo, $hidden_items);
+    return $content_repo ;
+}
+
 function JSON_file_to_array($JSON_file_path) {
     $json_file = file_get_contents($JSON_file_path);
     $json_file = json_decode($json_file, true);
@@ -71,7 +78,7 @@ function find_infos($total_JSON_array, $ville, $categorie) {
         $i++;
     }
 
-    $html = '<a href="?view=' . $id_file . '"><div data-toggle="popover" data-trigger="hover" data-placement="bottom"
+    $html = '<a href="./view.php?view=' . $id_file . '"><div data-toggle="popover" data-trigger="hover" data-placement="bottom"
     title="Statistiques" data-content="<ul>' . $popover_content . '</ul>">' . $fields_view . '</div></a>';
 
     return ['HTML' => $html, 'score' => $score];
