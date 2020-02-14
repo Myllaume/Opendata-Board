@@ -22,16 +22,14 @@
     $content_repo = scandir('./data/');
     $hidden_items = array('.', '..', '.DS_Store');
     $content_repo = array_diff($content_repo, $hidden_items);
-    ?>
+    
+    $all_JSON_content = [];
+    foreach ($content_repo as $tab_index => $JSON_file_name):
+        array_push($all_JSON_content, JSON_file_to_array('./data/' . $JSON_file_name));
+    endforeach;
 
-    <?php
-        $total_tab = [];
-        foreach ($content_repo as $tab_index => $JSON_file_name):
-            array_push($total_tab, JSON_file_to_array('./data/' . $JSON_file_name));
-        endforeach;
-
-        $tab_categories = find_all_keys($total_tab, 'categorie');
-        $tab_villes = find_all_keys($total_tab, 'lieu');
+    $tab_categories = find_all_keys($all_JSON_content, 'categorie');
+    $tab_villes = find_all_keys($all_JSON_content, 'lieu');
     ?>
 
     <h1>Data census France</h1>
@@ -52,7 +50,7 @@
                 <?php foreach ($tab_categories as $categorie): ?>
                 <td>
                     <?php
-                    $infos = find_infos($total_tab, $ville, $categorie);
+                    $infos = find_infos($all_JSON_content, $ville, $categorie);
                     echo $infos['HTML'];
                     echo $infos['score'];
                     ?>
