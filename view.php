@@ -26,21 +26,25 @@ if (!isset($_GET) || empty($_GET['view']) ||
     <!-- <link rel="stylesheet" href="style.css"> -->
 </head>
 
-<body>
+<body class="p-2">
 
-    <h1>Data census France</h1>
+    <?php
+        $JSON_file = JSON_file_to_array('./data/' . $_GET['view'] . '.json');
+    ?>
 
-    <a href="./index.php" class="btn btn-secondary my-5">Retour à l'accueil</a>
+    <h1><?= $JSON_file['lieu'] ?> / <?= $JSON_file['categorie'] ?> / <?= $JSON_file['annee'] ?></h1>
 
-    <pre>
-        <?php
-            print_r(JSON_file_to_array('./data/' . $_GET['view'] . '.json'));
-        ?>
-    </pre>
+    <a href="./index.php" class="btn btn-secondary my-2">Retour à l'accueil</a>
 
-    <footer>
-        <p>Créé par les étudiants de la licence professionnelle MIND de l'IUT Bordeaux Montaigne.</p>
-    </footer>
+    <h2>Description</h2>
+
+    <p><?= $JSON_file['remarques'] ?></p>
+
+    <p>Modifié par <?= $JSON_file['contributor'] ?> le <?= $JSON_file['date_last_edit'] ?></p>
+
+    <a href="<?= $JSON_file['data_loc'] ?>" target="_target" class="btn btn-primary my-2">Accéder aux données</a>
+
+    <?php include_once './include/footer.html' ?>
 
     <!-- <script src="./libs/jquery.min.js"></script> -->
     <!-- <script src="./libs/popper.min.js"></script> -->

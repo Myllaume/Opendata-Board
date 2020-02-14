@@ -69,7 +69,7 @@ function find_infos($total_JSON_array, $ville, $categorie) {
                 $fields_view .= '<span class="field-color field-color--unsure"></span>';
                 $popover_content .= '<li>' . $tab_fields[$i] . ' : Incertain</li>';
                 break;
-            case 'no_data':
+            case 'no data':
                 $fields_view .= '<span class="field-color field-color--no-data"></span>';
                 $popover_content .= '<li>' . $tab_fields[$i] . ' : Pas de données</li>';
                 break;

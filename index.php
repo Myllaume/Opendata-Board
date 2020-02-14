@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="p-2">
 
     <?php
     $content_repo = get_all_file_names();
@@ -59,9 +59,7 @@
         </tbody>
     </table>
 
-    <footer>
-        <p>Créé par les étudiants de la licence professionnelle MIND de l'IUT Bordeaux Montaigne.</p>
-    </footer>
+    <?php include_once './include/footer.html' ?>
 
     <script src="./libs/jquery.min.js"></script>
     <script src="./libs/popper.min.js"></script>
