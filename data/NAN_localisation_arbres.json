@@ -1,0 +1,20 @@
+{
+    "annee" : 2019,
+    "lieu" : "Nantes",
+    "categorie" : "Localisation des arbres",
+    "data_loc" : "https://data.nantesmetropole.fr/explore/dataset/244400404_patrimoine-arbore-nantes/table/?disjunctive.type_espace&disjunctive.site&disjunctive.genre&disjunctive.espece&disjunctive.sous_espece&disjunctive.variete&disjunctive.cultivar&disjunctive.allergene&disjunctive.hauteur_totale&disjunctive.hauteur_moy_fut&disjunctive.forme_actuelle&disjunctive.arbre_remarquable&disjunctive.espace_boise_classe",
+    "is_open_licenced" : "no",
+    "is_free" : "no",
+    "is_machine_readabled" : "no",
+    "is_updated" : "no",
+    "is_easy_dowloaded" : "no",
+    "is_public" : "no",
+    "is_numeric" : "no",
+    "is_on_web" : "yes",
+    "is_official" : "no",
+    "remarques" : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse a incidunt inventore neque ad assumenda eveniet aperiam aliquid doloribus veniam?",
+    "date_data_upload" : "11-04-2014",
+    "data_format" : "CSV",
+    "contributor" : "Yves Duval",
+    "date_last_edit" : "14-02-2019"
+}

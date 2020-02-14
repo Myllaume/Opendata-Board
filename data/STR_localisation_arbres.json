@@ -1,0 +1,20 @@
+{
+    "annee" : 2017,
+    "lieu" : "Strasbourg",
+    "categorie" : "Espace verts",
+    "data_loc" : "https://data.strasbourg.eu/explore/dataset/lieux_parcs/table/",
+    "is_open_licenced" : "yes",
+    "is_free" : "yes",
+    "is_machine_readabled" : "yes",
+    "is_updated" : "yes",
+    "is_easy_dowloaded" : "yes",
+    "is_public" : "yes",
+    "is_numeric" : "yes",
+    "is_on_web" : "yes",
+    "is_official" : "yes",
+    "remarques" : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse a incidunt inventore neque ad assumenda eveniet aperiam aliquid doloribus veniam?",
+    "date_data_upload" : "12-12-2018",
+    "data_format" : "CSV, JSON, XLS, GeoJSON, Shapefile, KML",
+    "contributor" : "Guillaume Brioudes",
+    "date_last_edit" : "14-02-2020"
+}

@@ -1,0 +1,20 @@
+{
+    "annee" : 2017,
+    "lieu" : "Lille",
+    "categorie" : "Chantier en cours sur l'espace public",
+    "data_loc" : "https://data.strasbourg.eu/explore/dataset/lieux_parcs/table/",
+    "is_open_licenced" : "unsure",
+    "is_free" : "no",
+    "is_machine_readabled" : "yes",
+    "is_updated" : "yes",
+    "is_easy_dowloaded" : "unsure",
+    "is_public" : "no",
+    "is_numeric" : "yes",
+    "is_on_web" : "no",
+    "is_official" : "yes",
+    "remarques" : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse a incidunt inventore neque ad assumenda eveniet aperiam aliquid doloribus veniam?",
+    "date_data_upload" : "12-01-2018",
+    "data_format" : "CSV, GeoJSON, Shapefile, KML",
+    "contributor" : "Guillaume Brioudes",
+    "date_last_edit" : "11-08-2010"
+}

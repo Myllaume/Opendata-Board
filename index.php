@@ -14,13 +14,24 @@
 <body>
 
     <?php
-    // récupération du fichier CSV contenant le nom de toutes les villes
-    $tab_villes_file = file_get_contents("./cities.csv");
-    $tab_categories_file = file_get_contents("./categories.csv");
-    // transformation du fichier CSV en array
-    $tab_villes = str_getcsv($tab_villes_file, ",");
-    $tab_categories = str_getcsv($tab_categories_file, ",");
+    include_once './functions.php';
+
+    $content_repo = scandir('./data/');
+    $hidden_items = array('.', '..', '.DS_Store');
+    $content_repo = array_diff($content_repo, $hidden_items);
     ?>
+
+    <pre>
+        <?php
+            $total_tab = [];
+            foreach ($content_repo as $tab_index => $JSON_file_name):
+                array_push($total_tab, JSON_file_to_array('./data/' . $JSON_file_name));
+            endforeach;
+
+            $tab_categories = find_all_keys($total_tab, 'categorie');
+            $tab_villes = find_all_keys($total_tab, 'lieu');
+        ?>
+    </pre>
 
     <h1>Data census France</h1>
 
@@ -38,7 +49,7 @@
             <tr>
                 <th scope="row"><?= $ville ?></th>
                 <?php foreach ($tab_categories as $categorie): ?>
-                <td>/</td>
+                <td><?= $ville ?> : <?= $categorie ?></td>
                 <?php endforeach; ?>
             </tr>
             <?php endforeach; ?>

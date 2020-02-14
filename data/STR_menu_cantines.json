@@ -1,0 +1,20 @@
+{
+    "annee" : 2020,
+    "lieu" : "Strasbourg",
+    "categorie" : "Menus des cantines",
+    "data_loc" : "https://www.strasbourg.eu/menus-restauration-scolaire",
+    "is_open_licenced" : "no",
+    "is_free" : "yes",
+    "is_machine_readabled" : "yes",
+    "is_updated" : "yes",
+    "is_easy_dowloaded" : "no",
+    "is_public" : "yes",
+    "is_numeric" : "no",
+    "is_on_web" : "yes",
+    "is_official" : "yes",
+    "remarques" : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse a incidunt inventore neque ad assumenda eveniet aperiam aliquid doloribus veniam?",
+    "date_data_upload" : "11-06-2018",
+    "data_format" : "CSV, XLS, JSON",
+    "contributor" : "Halvares Rodriguez",
+    "date_last_edit" : "21-08-2012"
+}
