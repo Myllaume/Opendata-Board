@@ -59,21 +59,21 @@ function find_infos($total_JSON_array, $ville, $categorie) {
     foreach ($tab_infos as $tab_index => $value) {
         switch ($value) {
             case 'yes':
-                $fields_view .= '<span class="field-color field-color--yes"></span>';
-                $popover_content .= '<li>' . $all_fields_name[$i] . ' : Oui</li>';
+                $fields_view .= '<span class=\'field-color field-color--yes\'></span>';
+                $popover_content .= '<li class=\'list-group-item list-group-item-success\'>' . $all_fields_name[$i] . ' : Oui</li>';
                 $score++;
                 break;
             case 'no':
-                $fields_view .= '<span class="field-color field-color--no"></span>';
-                $popover_content .= '<li>' . $all_fields_name[$i] . ' : Non</li>';
+                $fields_view .= '<span class=\'field-color field-color--no\'></span>';
+                $popover_content .= '<li class=\'list-group-item list-group-item-danger\'>' . $all_fields_name[$i] . ' : Non</li>';
                 break;
             case 'unsure':
-                $fields_view .= '<span class="field-color field-color--unsure"></span>';
-                $popover_content .= '<li>' . $all_fields_name[$i] . ' : Incertain</li>';
+                $fields_view .= '<span class=\'field-color field-color--unsure\'></span>';
+                $popover_content .= '<li class=\'list-group-item list-group-item-dark\'>' . $all_fields_name[$i] . ' : Incertain</li>';
                 break;
             case 'no data':
-                $fields_view .= '<span class="field-color field-color--no-data"></span>';
-                $popover_content .= '<li>' . $all_fields_name[$i] . ' : Pas de données</li>';
+                $fields_view .= '<span class=\'field-color field-color--no-data\'></span>';
+                $popover_content .= '<li class=\'list-group-item list-group-item-light\'>' . $all_fields_name[$i] . ' : Pas de données</li>';
                 break;
         }
 
@@ -81,7 +81,7 @@ function find_infos($total_JSON_array, $ville, $categorie) {
     }
 
     $html = '<a href="./view.php?view=' . $id_file . '"><div data-toggle="popover" data-trigger="hover" data-placement="bottom"
-    title="Statistiques" data-content="<ul>' . $popover_content . '</ul>">' . $fields_view . '</div></a>';
+    title="Statistiques" data-content="<ul class=\'list-group\'>' . $popover_content . '<ul>">' . $fields_view . '</div></a>';
 
     return ['HTML' => $html, 'score' => $score];
 }
