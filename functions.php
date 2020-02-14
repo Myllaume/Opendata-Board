@@ -34,11 +34,11 @@ function find_infos($total_JSON_array, $ville, $categorie) {
 
     $tab_infos = [];
 
-    $tab_fields = CSV_file_to_array('./fields.csv');
+    $all_fields = CSV_file_to_array('./fields.csv');
 
     $id_file = '';
 
-    foreach ($tab_fields as $field) {
+    foreach ($all_fields as $field) {
         foreach ($total_JSON_array as $tab_index => $value) {
 
             if ($value['categorie'] == $categorie && $value['lieu'] == $ville) {
@@ -54,24 +54,26 @@ function find_infos($total_JSON_array, $ville, $categorie) {
 
     $i = 0;
 
+    $all_fields_name = CSV_file_to_array('./fields_name.csv');
+
     foreach ($tab_infos as $tab_index => $value) {
         switch ($value) {
             case 'yes':
                 $fields_view .= '<span class="field-color field-color--yes"></span>';
-                $popover_content .= '<li>' . $tab_fields[$i] . ' : Oui</li>';
+                $popover_content .= '<li>' . $all_fields_name[$i] . ' : Oui</li>';
                 $score++;
                 break;
             case 'no':
                 $fields_view .= '<span class="field-color field-color--no"></span>';
-                $popover_content .= '<li>' . $tab_fields[$i] . ' : Non</li>';
+                $popover_content .= '<li>' . $all_fields_name[$i] . ' : Non</li>';
                 break;
             case 'unsure':
                 $fields_view .= '<span class="field-color field-color--unsure"></span>';
-                $popover_content .= '<li>' . $tab_fields[$i] . ' : Incertain</li>';
+                $popover_content .= '<li>' . $all_fields_name[$i] . ' : Incertain</li>';
                 break;
             case 'no data':
                 $fields_view .= '<span class="field-color field-color--no-data"></span>';
-                $popover_content .= '<li>' . $tab_fields[$i] . ' : Pas de données</li>';
+                $popover_content .= '<li>' . $all_fields_name[$i] . ' : Pas de données</li>';
                 break;
         }
 

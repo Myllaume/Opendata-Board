@@ -1,4 +1,6 @@
 <?php
+ini_set('display_errors','on');
+error_reporting(E_ALL);
 include_once './functions.php';
 $content_repo = get_all_file_names();
 
@@ -39,8 +41,39 @@ if (!isset($_GET) || empty($_GET['view']) ||
     <h2>Description</h2>
 
     <p><?= $JSON_file['remarques'] ?></p>
+    <p>Mis à disposition par <?= $JSON_file['institution'] ?></p>
 
-    <p>Modifié par <?= $JSON_file['contributor'] ?> le <?= $JSON_file['date_last_edit'] ?></p>
+    <ul class="list-group col-sm-3">
+    <?php
+    $all_fields = CSV_file_to_array('./fields.csv');
+    $all_fields_name = CSV_file_to_array('./fields_name.csv');
+    $i = 0;
+    
+    foreach ($JSON_file as $key => $value) {
+        if (!in_array($key, $all_fields)) {
+            continue;
+        }
+        
+        switch ($value) {
+            case 'yes':
+                echo '<li class="list-group-item list-group-item-success">' . $all_fields_name[$i] . ' Oui</li>';
+                break;
+            case 'no':
+                echo '<li class="list-group-item list-group-item-danger">' . $all_fields_name[$i] . ' Non</li>';
+                break;
+            case 'unsure':
+                echo '<li class="list-group-item list-group-item-dark">' . $all_fields_name[$i] . ' Incertain</li>';
+                break;
+            case 'no data':
+                echo '<li class="list-group-item list-group-item-light">' . $all_fields_name[$i] . ' Pas de données</li>';
+                break;
+        }
+        $i++;
+    }
+    ?>
+    </ul>
+
+    <p>Données modifié par <?= $JSON_file['contributor'] ?> le <?= $JSON_file['date_last_edit'] ?></p>
 
     <a href="<?= $JSON_file['data_loc'] ?>" target="_target" class="btn btn-primary my-2">Accéder aux données</a>
 
