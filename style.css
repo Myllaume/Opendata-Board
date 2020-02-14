@@ -1,0 +1,19 @@
+.field-color {
+    display: inline-block;
+    width: 4px;
+    height: 15px;
+    margin: 0 1px;
+}
+
+.field-color--yes {
+    background-color: green;
+}
+.field-color--no {
+    background-color: red;
+}
+.field-color--unsure {
+    background-color: gray;
+}
+.field-color--no-data {
+    background-color: black;
+}

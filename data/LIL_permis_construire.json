@@ -1,0 +1,21 @@
+{
+    "annee" : 2010,
+    "lieu" : "Lille",
+    "categorie" : "Permis de construire",
+    "id" : "LIL_permis_construire",
+    "data_loc" : "https://www.strasbourg.eu/menus-restauration-scolaire",
+    "is_open_licenced" : "yes",
+    "is_free" : "yes",
+    "is_machine_readabled" : "yes",
+    "is_updated" : "yes",
+    "is_easy_dowloaded" : "no",
+    "is_public" : "no",
+    "is_numeric" : "no",
+    "is_on_web" : "no",
+    "is_official" : "yes",
+    "remarques" : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse a incidunt inventore neque ad assumenda eveniet aperiam aliquid doloribus veniam?",
+    "date_data_upload" : "08-06-2017",
+    "data_format" : "CSV, XLS",
+    "contributor" : "Jimenez Lavar",
+    "date_last_edit" : "12-04-2022"
+}

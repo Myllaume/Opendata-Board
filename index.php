@@ -6,20 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Datacity - Accueil</title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="/nantarbourg/libs/bootstrap/css/bootstrap-grid.min.css"> -->
+    <link rel="stylesheet" href="./libs/bootstrap/css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="./libs/bootstrap/css/bootstrap.min.css">
+
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
     <?php
-    // récupération du fichier CSV contenant le nom de toutes les villes
-    $tab_villes_file = file_get_contents("./cities.csv");
-    $tab_categories_file = file_get_contents("./categories.csv");
-    // transformation du fichier CSV en array
-    $tab_villes = str_getcsv($tab_villes_file, ",");
-    $tab_categories = str_getcsv($tab_categories_file, ",");
+    include_once './functions.php';
+
+    $content_repo = scandir('./data/');
+    $hidden_items = array('.', '..', '.DS_Store');
+    $content_repo = array_diff($content_repo, $hidden_items);
+    
+    $all_JSON_content = [];
+    foreach ($content_repo as $tab_index => $JSON_file_name):
+        array_push($all_JSON_content, JSON_file_to_array('./data/' . $JSON_file_name));
+    endforeach;
+
+    $tab_categories = find_all_keys($all_JSON_content, 'categorie');
+    $tab_villes = find_all_keys($all_JSON_content, 'lieu');
     ?>
 
     <h1>Data census France</h1>
@@ -38,7 +48,13 @@
             <tr>
                 <th scope="row"><?= $ville ?></th>
                 <?php foreach ($tab_categories as $categorie): ?>
-                <td>/</td>
+                <td>
+                    <?php
+                    $infos = find_infos($all_JSON_content, $ville, $categorie);
+                    echo $infos['HTML'];
+                    echo $infos['score'];
+                    ?>
+                </td>
                 <?php endforeach; ?>
             </tr>
             <?php endforeach; ?>
@@ -49,16 +65,20 @@
         <p>Créé par les étudiants de la licence professionnelle MIND de l'IUT Bordeaux Montaigne.</p>
     </footer>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-	    crossorigin="anonymous"></script>
+    <script src="./libs/jquery.min.js"></script>
+    <script src="./libs/popper.min.js"></script>
+    <script src="./libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="./libs/bootstrap/js/bootstrap.min.js"></script>
 
     <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 
     <script>
+        // dynamisation du tableau
         $(document).ready( function () {
             $('#tab').DataTable();
         });
+
+        $('[data-toggle="popover"]').popover({ trigger: "hover", html:true });
     </script>
 
 </body>
