@@ -49,7 +49,7 @@
             <tr>
                 <th scope="row"><?= $ville ?></th>
                 <?php foreach ($tab_categories as $categorie): ?>
-                <td><?= $ville ?> : <?= $categorie ?></td>
+                <td><?= print_r(find_infos($total_tab, $ville, $categorie)) ?></td>
                 <?php endforeach; ?>
             </tr>
             <?php endforeach; ?>

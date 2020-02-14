@@ -1,7 +1,7 @@
 {
     "annee" : 2017,
     "lieu" : "Strasbourg",
-    "categorie" : "Espace verts",
+    "categorie" : "Localisation des arbres",
     "data_loc" : "https://data.strasbourg.eu/explore/dataset/lieux_parcs/table/",
     "is_open_licenced" : "yes",
     "is_free" : "yes",
