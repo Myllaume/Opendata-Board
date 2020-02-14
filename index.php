@@ -24,17 +24,15 @@
     $content_repo = array_diff($content_repo, $hidden_items);
     ?>
 
-        <?php
-            $total_tab = [];
-            foreach ($content_repo as $tab_index => $JSON_file_name):
-                array_push($total_tab, JSON_file_to_array('./data/' . $JSON_file_name));
-            endforeach;
+    <?php
+        $total_tab = [];
+        foreach ($content_repo as $tab_index => $JSON_file_name):
+            array_push($total_tab, JSON_file_to_array('./data/' . $JSON_file_name));
+        endforeach;
 
-            $tab_categories = find_all_keys($total_tab, 'categorie');
-            $tab_villes = find_all_keys($total_tab, 'lieu');
-        ?>
-
-<a tabindex="0" class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-trigger="focus" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">Dismissible popover</a>
+        $tab_categories = find_all_keys($total_tab, 'categorie');
+        $tab_villes = find_all_keys($total_tab, 'lieu');
+    ?>
 
     <h1>Data census France</h1>
 
@@ -55,8 +53,8 @@
                 <td>
                     <?php
                     $infos = find_infos($total_tab, $ville, $categorie);
-                    echo visualize_field($infos)['HTML'];
-                    echo visualize_field($infos)['score'];
+                    echo $infos['HTML'];
+                    echo $infos['score'];
                     ?>
                 </td>
                 <?php endforeach; ?>

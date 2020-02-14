@@ -2,6 +2,7 @@
     "annee" : 2020,
     "lieu" : "Strasbourg",
     "categorie" : "Menus des cantines",
+    "id" : "STR_menu_cantines",
     "data_loc" : "https://www.strasbourg.eu/menus-restauration-scolaire",
     "is_open_licenced" : "no",
     "is_free" : "yes",

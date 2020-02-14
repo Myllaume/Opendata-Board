@@ -2,6 +2,7 @@
     "annee" : 2018,
     "lieu" : "Nantes",
     "categorie" : "Chantier en cours sur l'espace public",
+    "id" : "NAN_chantier_espace_public",
     "data_loc" : "https://data.nantesmetropole.fr/explore/dataset/244400404_info-trafic-tan-temps-reel/information/",
     "is_open_licenced" : "yes",
     "is_free" : "no",

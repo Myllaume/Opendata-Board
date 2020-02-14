@@ -2,6 +2,7 @@
     "annee" : 2017,
     "lieu" : "Strasbourg",
     "categorie" : "Localisation des arbres",
+    "id" : "STR_localisation_arbres",
     "data_loc" : "https://data.strasbourg.eu/explore/dataset/lieux_parcs/table/",
     "is_open_licenced" : "yes",
     "is_free" : "yes",

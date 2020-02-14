@@ -2,6 +2,7 @@
     "annee" : 2020,
     "lieu" : "Nantes",
     "categorie" : "Menus des cantines",
+    "id" : "NAN_menu_cantines",
     "data_loc" : "https://www.data.gouv.fr/fr/datasets/menus-des-cantines-scolaires-a-nantes-1/#_",
     "is_open_licenced" : "yes",
     "is_free" : "yes",

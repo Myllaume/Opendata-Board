@@ -2,6 +2,7 @@
     "annee" : 2017,
     "lieu" : "Strasbourg",
     "categorie" : "Chantier en cours sur l'espace public",
+    "id" : "STR_chantier_espace_public",
     "data_loc" : "https://data.strasbourg.eu/explore/dataset/lieux_parcs/table/",
     "is_open_licenced" : "unsure",
     "is_free" : "no",

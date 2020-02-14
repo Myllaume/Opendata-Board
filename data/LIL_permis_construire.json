@@ -2,6 +2,7 @@
     "annee" : 2010,
     "lieu" : "Lille",
     "categorie" : "Permis de construire",
+    "id" : "LIL_permis_construire",
     "data_loc" : "https://www.strasbourg.eu/menus-restauration-scolaire",
     "is_open_licenced" : "yes",
     "is_free" : "yes",

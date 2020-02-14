@@ -25,32 +25,27 @@ function find_all_keys($total_JSON_array, $key) {
 
 function find_infos($total_JSON_array, $ville, $categorie) {
 
-    $tab = [];
+    $tab_infos = [];
 
     $tab_fields = CSV_file_to_array('./fields.csv');
+
+    $id_file = '';
 
     foreach ($tab_fields as $field) {
         foreach ($total_JSON_array as $tab_index => $value) {
 
             if ($value['categorie'] == $categorie && $value['lieu'] == $ville) {
-                array_push($tab, $value[$field]);
+                array_push($tab_infos, $value[$field]);
+                $id_file = $value['id'];
             }
         }
     }
-
-    return $tab;
-}
-
-function visualize_field($tab_infos) {
-    $popover_content = 
 
     $fields_view = '';
     $popover_content = '';
     $score = 0;
 
     $i = 0;
-
-    $tab_fields = CSV_file_to_array('./fields.csv');
 
     foreach ($tab_infos as $tab_index => $value) {
         switch ($value) {
@@ -76,8 +71,8 @@ function visualize_field($tab_infos) {
         $i++;
     }
 
-    $html = '<div data-toggle="popover" data-trigger="hover" data-placement="bottom"
-    title="Statistiques" data-content="<ul>' . $popover_content . '</ul>">' . $fields_view . '</div>';
+    $html = '<a href="?view=' . $id_file . '"><div data-toggle="popover" data-trigger="hover" data-placement="bottom"
+    title="Statistiques" data-content="<ul>' . $popover_content . '</ul>">' . $fields_view . '</div></a>';
 
     return ['HTML' => $html, 'score' => $score];
 }
