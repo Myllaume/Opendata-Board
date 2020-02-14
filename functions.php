@@ -38,13 +38,28 @@ function find_infos($total_JSON_array, $ville, $categorie) {
         }
     }
 
-    // foreach ($total_JSON_array as $tab_index => $value) {
-    //     array_push($tab, $value[$key]);
-    // }
-
-    // if ($total_JSON_array) {
-    //     # code...
-    // }
-
     return $tab;
+}
+
+function visualize_field($tab_infos) {
+    $html = '';
+    
+    foreach ($tab_infos as $tab_index => $value) {
+        switch ($value) {
+            case 'yes':
+                $html .= '<span class="field-color field-color--yes"></span>';
+                break;
+            case 'no':
+                $html .= '<span class="field-color field-color--no"></span>';
+                break;
+            case 'unsure':
+                $html .= '<span class="field-color field-color--unsure"></span>';
+                break;
+            case 'no_data':
+                $html .= '<span class="field-color field-color--no-data"></span>';
+                break;
+        }
+    }
+
+    return $html;
 }
