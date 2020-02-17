@@ -24,8 +24,7 @@ if (!isset($_GET) || empty($_GET['view']) ||
     <link rel="stylesheet" href="./libs/bootstrap/css/bootstrap-reboot.min.css">
     <link rel="stylesheet" href="./libs/bootstrap/css/bootstrap.min.css">
 
-    <!-- <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"> -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./assets/style.css">
 </head>
 
 <body class="p-2 col-sm-7">

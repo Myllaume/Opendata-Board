@@ -12,11 +12,11 @@
     <link rel="stylesheet" href="./libs/bootstrap/css/bootstrap-reboot.min.css">
     <link rel="stylesheet" href="./libs/bootstrap/css/bootstrap.min.css">
 
-    <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./libs/datatables.css">
+    <link rel="stylesheet" href="./assets/style.css">
 </head>
 
-<body class="p-2">
+<body class="col-lg-10">
 
     <?php
     $content_repo = get_all_file_names();
@@ -39,8 +39,9 @@
             <tr>
                 <th scope="col">Ville</th>
                 <?php foreach ($tab_categories as $categorie): ?>
-                <th><?= $categorie ?></th>
+                <th class="sum-col"><?= $categorie ?></th>
                 <?php endforeach; ?>
+                <th>Total</th>
             </tr>
         </thead>
         <tbody>
@@ -56,6 +57,7 @@
                     ?>
                 </td>
                 <?php endforeach; ?>
+                <th class="total-col">2</th>
             </tr>
             <?php endforeach; ?>
         </tbody>
@@ -67,13 +69,16 @@
     <script src="./libs/popper.min.js"></script>
     <script src="./libs/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="./libs/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 
-    <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="./assets/table.js"></script>
 
     <script>
         // dynamisation du tableau
         $(document).ready( function () {
-            $('#tab').DataTable();
+            var table = $('#tab').DataTable({
+                paging: false
+            });
         });
 
         $('[data-toggle="popover"]').popover({ trigger: "hover", html:true });

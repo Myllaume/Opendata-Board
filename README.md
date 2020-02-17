@@ -79,3 +79,4 @@ Tout JSON ajouté, supprimé, mis à jour, modifie immédiatement la visualisati
 Liste des librairies utilisées pour la réalisation du site :
 - [Bootstrap](https://getbootstrap.net/)
 - [DataTables](https://datatables.net/)
+- [Popper](https://popper.js.org/)

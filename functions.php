@@ -76,7 +76,7 @@ function find_infos($total_JSON_array, $ville, $categorie) {
         $i++;
     }
 
-    $html = '<a href="./view.php?view=' . $id_file . '"><div data-toggle="popover" data-trigger="hover" data-placement="bottom"
+    $html = '<a href="./view.php?view=' . $id_file . '"><div data-toggle="popover" data-trigger="hover" data-placement="right"
     title="Statistiques" data-content="<ul class=\'list-group || little-list-group\'>' . $popover_content . '<ul>">' . $fields_view . '</div></a>';
 
     return ['HTML' => $html, 'score' => $score];
