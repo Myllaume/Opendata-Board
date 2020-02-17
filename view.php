@@ -1,6 +1,4 @@
 <?php
-ini_set('display_errors','on');
-error_reporting(E_ALL);
 include_once './functions.php';
 $content_repo = get_all_file_names();
 
@@ -41,6 +39,7 @@ if (!isset($_GET) || empty($_GET['view']) ||
 
     <p><?= $JSON_file['remarques'] ?></p>
     <p>Mis à disposition par <?= $JSON_file['institution'] ?>.</p>
+    <p>Formats disponibles : <?= $JSON_file['data_format'] ?>.</p>
 
     <ul class="list-group my-2">
     <?php
@@ -65,8 +64,6 @@ if (!isset($_GET) || empty($_GET['view']) ||
                 break;
         }
         $i++;
-
-        // var_dump($JSON_file);
     }
     ?>
     </ul>

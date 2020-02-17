@@ -39,7 +39,7 @@
             <tr>
                 <th scope="col">Ville</th>
                 <?php foreach ($tab_categories as $categorie): ?>
-                <th class="sum-col"><?= $categorie ?></th>
+                <th><?= $categorie ?></th>
                 <?php endforeach; ?>
                 <th>Total</th>
             </tr>
@@ -49,7 +49,7 @@
             <tr>
                 <th scope="row"><?= $ville ?></th>
                 <?php foreach ($tab_categories as $categorie): ?>
-                <td>
+                <td class="sum-col">
                     <?php
                     $infos = find_infos($all_JSON_content, $ville, $categorie);
                     echo $infos['HTML'];
@@ -70,6 +70,7 @@
     <script src="./libs/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="./libs/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="//cdn.datatables.net/plug-ins/1.10.20/api/sum().js"></script>
 
     <script src="./assets/table.js"></script>
 
@@ -78,7 +79,7 @@
         $(document).ready( function () {
             var table = $('#tab').DataTable({
                 paging: false
-            });
+            });            
         });
 
         $('[data-toggle="popover"]').popover({ trigger: "hover", html:true });
