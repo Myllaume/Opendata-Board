@@ -32,6 +32,8 @@
 
     <h1>Data census France</h1>
 
+    <p><?= count($content_repo); ?> jeux de données analysés pour <?= count($tab_villes); ?> villes.</p>
+
     <table class="table" id="tab">
         <thead class="thead-dark">
             <tr>
