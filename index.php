@@ -1,4 +1,7 @@
-<?php include_once './functions.php'; ?>
+<?php
+// import des fonctions PHP
+include_once './functions.php';
+?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -8,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Datacity - Accueil</title>
 
-    <!-- <link rel="stylesheet" href="/nantarbourg/libs/bootstrap/css/bootstrap-grid.min.css"> -->
+    <!-- LIBRAIRIES -->
     <link rel="stylesheet" href="./libs/bootstrap/css/bootstrap-reboot.min.css">
     <link rel="stylesheet" href="./libs/bootstrap/css/bootstrap.min.css">
 
@@ -19,13 +22,18 @@
 <body class="col-lg-10">
 
     <?php
-    $content_repo = get_all_file_names();
+    // Obtenir le nom de tous les fichiers contenus dans le repertoire 'data'
+    $content_repo = get_all_file_names('./data/');
     
+    // Avec chacun des fichiers, remplir le tableau '$all_JSON_content',
+    // il contient dorénavant l'ensemble de la data issue de tous les fichiers
     $all_JSON_content = [];
     foreach ($content_repo as $tab_index => $JSON_file_name):
         array_push($all_JSON_content, JSON_file_to_array('./data/' . $JSON_file_name));
     endforeach;
 
+    // Extraire la liste des catégories et villes stockées,
+    // en fonction de leur clé
     $tab_categories = find_all_keys($all_JSON_content, 'categorie');
     $tab_villes = find_all_keys($all_JSON_content, 'lieu');
     ?>
@@ -52,12 +60,12 @@
                 <td class="sum-col">
                     <?php
                     $infos = find_infos($all_JSON_content, $ville, $categorie);
-                    echo $infos['HTML'];
-                    echo $infos['score'];
+                    echo $infos['HTML']; // lien et Poppover du set de données
+                    echo $infos['score']; // score du set de données
                     ?>
                 </td>
                 <?php endforeach; ?>
-                <th class="total-col">2</th>
+                <th class="total-col"></th>
             </tr>
             <?php endforeach; ?>
         </tbody>
@@ -65,6 +73,7 @@
 
     <?php include_once './include/footer.html' ?>
 
+    <!-- LIBRAIRIES -->
     <script src="./libs/jquery.min.js"></script>
     <script src="./libs/popper.min.js"></script>
     <script src="./libs/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -75,13 +84,14 @@
     <script src="./assets/table.js"></script>
 
     <script>
-        // dynamisation du tableau
+        // actionvation du tableau
         $(document).ready( function () {
             var table = $('#tab').DataTable({
                 paging: false
             });            
         });
 
+        // activation des Poppovers
         $('[data-toggle="popover"]').popover({ trigger: "hover", html:true });
     </script>
 

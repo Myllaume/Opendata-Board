@@ -1,10 +1,13 @@
 <?php
+// import des fonctions PHP
 include_once './functions.php';
-$content_repo = get_all_file_names();
+// Obtenir le nom de tous les fichiers contenus dans le repertoire 'data'
+$content_repo = get_all_file_names('./data/');
 
 if (!isset($_GET) || empty($_GET['view']) ||
     !in_array($_GET['view'] . '.json', $content_repo)) {
-    
+    // s'il n'y a pas de GET(view) ou qu'il n'est pas dans la liste des fichier
+    // renvoie du client et interruption du chargement de la page
     header("Location: ./index.php");
     exit;
 }
@@ -18,7 +21,7 @@ if (!isset($_GET) || empty($_GET['view']) ||
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Datacity - Accueil</title>
 
-    <!-- <link rel="stylesheet" href="/nantarbourg/libs/bootstrap/css/bootstrap-grid.min.css"> -->
+    <!-- LIBRAIRIES -->
     <link rel="stylesheet" href="./libs/bootstrap/css/bootstrap-reboot.min.css">
     <link rel="stylesheet" href="./libs/bootstrap/css/bootstrap.min.css">
 
@@ -28,7 +31,9 @@ if (!isset($_GET) || empty($_GET['view']) ||
 <body class="p-2 col-sm-7">
 
     <?php
-        $JSON_file = JSON_file_to_array('./data/' . $_GET['view'] . '.json');
+    // stockage des informations du JSON
+    // '$_GET['view']' est le nom du fichier auquel il suffit d'ajouter le chemin et l'extension
+    $JSON_file = JSON_file_to_array('./data/' . $_GET['view'] . '.json');
     ?>
 
     <h1><?= $JSON_file['lieu'] ?> / <?= $JSON_file['categorie'] ?> / <?= $JSON_file['annee'] ?></h1>
@@ -43,15 +48,19 @@ if (!isset($_GET) || empty($_GET['view']) ||
 
     <ul class="list-group my-2">
     <?php
-    $all_fields = CSV_file_to_array('./fields.csv');
-    $all_fields_name = CSV_file_to_array('./fields_name.csv');
+    // recherche...
+    $all_fields = CSV_file_to_array('./fields.csv'); //... des champs d'information
+    $all_fields_name = CSV_file_to_array('./fields_name.csv'); //... et de leur nom complet
     $i = 0;
-    
+
+    // pour chaque champ du JSON...    
     foreach ($JSON_file as $key => $value) {
         if (!in_array($key, $all_fields)) {
+            //... s'il s'agit bien d'un champ référencé ...
             continue;
         }
         
+        //... préparer son affichage
         switch ($value) {
             case true:
                 echo '<li class="list-group-item list-group-item-success">' . $all_fields_name[$i] . ' Oui</li>';
