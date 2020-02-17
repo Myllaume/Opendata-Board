@@ -4,10 +4,10 @@ Création d'un repertoir de JSON normalisés. Un fichier PHP vient faire l'inter
 
 ## Sommaire
 
-- Création des JSON
-    - Convention de nommage
-- Interface
-    - Librairies utilisées
+- [Création des JSON](https://github.com/Myllaume/Datacity#json)
+    - [Convention de nommage](https://github.com/Myllaume/Datacity#conventions-de-nommage)
+- [Interface](https://github.com/Myllaume/Datacity#interface)
+    - [Librairies utilisées](https://github.com/Myllaume/Datacity#librairies-utilis%C3%A9es)
 
 ## JSON
 
@@ -24,15 +24,14 @@ Les fichiers JSON sont nommés tel que `STR_espace_vert.json`, soit
 |  id |  `string` |  Identifiant du fichier, strictement égale à son nom : si le fichier s'appelle "STR_espace_vert.json", son identifiant est "STR_espace_vert" |
 |  data_loc |  `string` |  Adresse où sont disponibles les données |
 |  institution |  `string` |  Organisation, entreprise ou institution, ayant créer le jeu de données |
-|  is_open_licenced |  ``string_state`` |  Si la licene des données est ouverte |
-| is_free  | `string_state`  |  Si l'accès au donnée est gratuit |
-|  is_machine_readabled |  `string_state` |  Si les données peuvent être lues par un logiciel |
-|  is_updated | `string_state`  | Si les données sont à jour  |
-| is_easy_dowloaded  |  `string_state` | Si les données sont faciles à télécharger  |
-| is_public  |  `string_state` | Si tout internaute n'a pas besoin de s'inscrire, de faire de demande et peut accéder immédiatement aux données |
-|  is_numeric | `string_state`  |  Si les données sont numérisées |
-|  is_on_web | `string_state`  | Si les données sont disponible sur une page web et non pas envoyées par courriel  |
-| is_official  | `string_state`  |  Si les données viennent d'une institution officielle ou sur sa demande et non d'une initiative privée ou citoyenne |
+|  is_open_licenced |  ``boolean`` |  Si la licene des données est ouverte |
+| is_free  | `boolean`  |  Si l'accès au donnée est gratuit |
+|  is_machine_readabled |  `boolean` |  Si les données peuvent être lues par un logiciel |
+|  is_updated | `boolean`  | Si les données sont à jour  |
+| is_easy_dowloaded  |  `boolean` | Si les données sont faciles à télécharger  |
+| is_public  |  `boolean` | Si tout internaute n'a pas besoin de s'inscrire, de faire de demande et peut accéder immédiatement aux données |
+|  is_numeric | `boolean`  |  Si les données sont numérisées |
+|  is_on_web | `boolean`  | Si les données sont disponible sur une page web et non pas envoyées par courriel  |
 |  remarques | `string`  |  Commentaires supplémentaires sur l'utilité, l'utilisation du set de données |
 |  date_data_upload | `date`  |  Date de mise en ligne des données format `DD-MM-AAAA` |
 |  data_format | `string`  |  Liste des formats de données dédiés au set de données séparés par des virgules |
@@ -43,11 +42,7 @@ Ecrire `null` dans un champ dont il manque les informations.
 
 ### Conventions de nommage
 
-Les `string_state` peuvent avoir trois valeurs :
-- `yes`
-- `no`
-- `unsure`
-- `no_data`
+Les `boolean` peuvent avoir trois valeurs :
 
 Les `string_cat` correspondent aux catégories admises sur le site, selon la liste suivante :
 
