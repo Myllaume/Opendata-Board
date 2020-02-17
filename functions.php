@@ -71,9 +71,9 @@ function find_infos($total_JSON_array, $ville, $categorie) {
                 $fields_view .= '<span class=\'field-color field-color--unsure\'></span>';
                 $popover_content .= '<li class=\'list-group-item list-group-item-dark\'>' . $all_fields_name[$i] . ' : Incertain</li>';
                 break;
-            case 'no data':
+            default:
                 $fields_view .= '<span class=\'field-color field-color--no-data\'></span>';
-                $popover_content .= '<li class=\'list-group-item list-group-item-light\'>' . $all_fields_name[$i] . ' : Pas de données</li>';
+                $popover_content .= '<li class=\'list-group-item list-group-item-dark\'>' . $all_fields_name[$i] . ' : Incertain</li>';
                 break;
         }
 
@@ -81,7 +81,7 @@ function find_infos($total_JSON_array, $ville, $categorie) {
     }
 
     $html = '<a href="./view.php?view=' . $id_file . '"><div data-toggle="popover" data-trigger="hover" data-placement="bottom"
-    title="Statistiques" data-content="<ul class=\'list-group\'>' . $popover_content . '<ul>">' . $fields_view . '</div></a>';
+    title="Statistiques" data-content="<ul class=\'list-group || little-list-group\'>' . $popover_content . '<ul>">' . $fields_view . '</div></a>';
 
     return ['HTML' => $html, 'score' => $score];
 }

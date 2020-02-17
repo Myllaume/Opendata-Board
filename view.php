@@ -25,10 +25,10 @@ if (!isset($_GET) || empty($_GET['view']) ||
     <link rel="stylesheet" href="./libs/bootstrap/css/bootstrap.min.css">
 
     <!-- <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"> -->
-    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="p-2">
+<body class="p-2 col-sm-7">
 
     <?php
         $JSON_file = JSON_file_to_array('./data/' . $_GET['view'] . '.json');
@@ -41,9 +41,9 @@ if (!isset($_GET) || empty($_GET['view']) ||
     <h2>Description</h2>
 
     <p><?= $JSON_file['remarques'] ?></p>
-    <p>Mis à disposition par <?= $JSON_file['institution'] ?></p>
+    <p>Mis à disposition par <?= $JSON_file['institution'] ?>.</p>
 
-    <ul class="list-group col-sm-3">
+    <ul class="list-group my-2">
     <?php
     $all_fields = CSV_file_to_array('./fields.csv');
     $all_fields_name = CSV_file_to_array('./fields_name.csv');
@@ -64,8 +64,8 @@ if (!isset($_GET) || empty($_GET['view']) ||
             case 'unsure':
                 echo '<li class="list-group-item list-group-item-dark">' . $all_fields_name[$i] . ' Incertain</li>';
                 break;
-            case 'no data':
-                echo '<li class="list-group-item list-group-item-light">' . $all_fields_name[$i] . ' Pas de données</li>';
+            default:
+                echo '<li class="list-group-item list-group-item-dark">' . $all_fields_name[$i] . ' Incertain</li>';
                 break;
         }
         $i++;
@@ -73,7 +73,7 @@ if (!isset($_GET) || empty($_GET['view']) ||
     ?>
     </ul>
 
-    <p>Données modifié par <?= $JSON_file['contributor'] ?> le <?= $JSON_file['date_last_edit'] ?></p>
+    <p>Données modifiées par <?= $JSON_file['contributor'] ?> le <?= $JSON_file['date_last_edit'] ?>.</p>
 
     <a href="<?= $JSON_file['data_loc'] ?>" target="_target" class="btn btn-primary my-2">Accéder aux données</a>
 

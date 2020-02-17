@@ -1,3 +1,11 @@
+h1 {
+    margin: 20px 0 30px 0;
+}
+
+h2 {
+    margin: 10px 0 20px 0;
+}
+
 .field-color {
     display: inline-block;
     width: 4px;
@@ -8,12 +16,19 @@
 .field-color--yes {
     background-color: green;
 }
+
 .field-color--no {
     background-color: red;
 }
+
 .field-color--unsure {
     background-color: gray;
 }
+
 .field-color--no-data {
     background-color: black;
+}
+
+.little-list-group {
+    font-size: 12px;
 }
