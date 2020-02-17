@@ -55,20 +55,19 @@ if (!isset($_GET) || empty($_GET['view']) ||
         }
         
         switch ($value) {
-            case 'yes':
+            case true:
                 echo '<li class="list-group-item list-group-item-success">' . $all_fields_name[$i] . ' Oui</li>';
                 break;
-            case 'no':
+            case false:
                 echo '<li class="list-group-item list-group-item-danger">' . $all_fields_name[$i] . ' Non</li>';
-                break;
-            case 'unsure':
-                echo '<li class="list-group-item list-group-item-dark">' . $all_fields_name[$i] . ' Incertain</li>';
                 break;
             default:
                 echo '<li class="list-group-item list-group-item-dark">' . $all_fields_name[$i] . ' Incertain</li>';
                 break;
         }
         $i++;
+
+        // var_dump($JSON_file);
     }
     ?>
     </ul>

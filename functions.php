@@ -58,18 +58,14 @@ function find_infos($total_JSON_array, $ville, $categorie) {
 
     foreach ($tab_infos as $tab_index => $value) {
         switch ($value) {
-            case 'yes':
+            case true:
                 $fields_view .= '<span class=\'field-color field-color--yes\'></span>';
                 $popover_content .= '<li class=\'list-group-item list-group-item-success\'>' . $all_fields_name[$i] . ' : Oui</li>';
                 $score++;
                 break;
-            case 'no':
+            case false:
                 $fields_view .= '<span class=\'field-color field-color--no\'></span>';
                 $popover_content .= '<li class=\'list-group-item list-group-item-danger\'>' . $all_fields_name[$i] . ' : Non</li>';
-                break;
-            case 'unsure':
-                $fields_view .= '<span class=\'field-color field-color--unsure\'></span>';
-                $popover_content .= '<li class=\'list-group-item list-group-item-dark\'>' . $all_fields_name[$i] . ' : Incertain</li>';
                 break;
             default:
                 $fields_view .= '<span class=\'field-color field-color--no-data\'></span>';
