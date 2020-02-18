@@ -73,21 +73,6 @@ include_once './functions.php';
         </tbody>
     </table>
 
-    <pre>
-    <?php
-    // $lololol = CSV_file_to_array('./fields_name.csv');
-    $csv_file = file_get_contents('./fields_all.csv');
-    $Data = str_getcsv($csv_file, "\n");
-    $tabtab = [];
-     //parse the rows
-    foreach($Data as &$Row) {
-        $Row = str_getcsv($Row, ";");
-        array_push($tabtab, $Row);
-    } //parse the items in rows
-    print_r($tabtab[1]);
-    ?>
-    </pre>
-
     <?php include_once './include/footer.html' ?>
 
     <!-- LIBRAIRIES -->
