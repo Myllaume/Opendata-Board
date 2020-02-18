@@ -1,6 +1,8 @@
 <?php
 /**
  * Chercher tous les fichiers dans un repertoire
+ * @param string $path Chemin du fichier vers le repertoir à analyser
+ * @return array Tableau contenant la liste des fichiers
  */
 
 function get_all_file_names($path) {
@@ -13,19 +15,28 @@ function get_all_file_names($path) {
 }
 
 /**
- * Obtenir un tableau d'une fichier JSON
+ * Obtenir un tableau d'un fichier JSON
+ * @param string $path Chemin du fichier vers le fichier JSON a transformer
+ * @return array Tableau contenant les données du fichier JSON
  */
 
-function JSON_file_to_array($JSON_file_path) {
-    $json_file = file_get_contents($JSON_file_path);
+function JSON_file_to_array($path) {
+    $json_file = file_get_contents($path);
     $json_file = json_decode($json_file, true);
     return $json_file;
 }
 
-function CSV_file_to_array($CSV_file_path, $line) {
+/**
+ * Obtenir un tableau d'un fichier CSV
+ * @param string $path Chemin du fichier vers le fichier CSV a transformer
+ * @param int $line Ligne du CSV à retourner
+ * @return array Tableau contenant les données d'une ligne du fichier CSV
+ */
+
+function CSV_file_to_array($path, $line) {
     $return_tab = [];
 
-    $csv_file = file_get_contents($CSV_file_path);
+    $csv_file = file_get_contents($path);
     $CSV_rows = str_getcsv($csv_file, "\n");
 
     foreach($CSV_rows as &$row) {
@@ -39,6 +50,9 @@ function CSV_file_to_array($CSV_file_path, $line) {
 /**
  * Pour un tableau JSON entré : trouver les entrées correspondany
  * à la clé entrée
+ * @param array $total_JSON_array Tableau contenant toutes les données JSON du site
+ * @param string $key Nom de la clé des fichiers retourner
+ * @return array Tableau des données gardées sous la clé renseignée
  */
 
 function find_all_keys($total_JSON_array, $key) {
@@ -58,6 +72,11 @@ function find_all_keys($total_JSON_array, $key) {
  * les concernant dans le tableau de données
  * 
  * Générer le score et le Popper pour ces informations
+ * 
+ * @param array $total_JSON_array Tableau contenant toutes les données JSON du site
+ * @param string $ville Nom de la ville, condition de renvoie
+ * @param string $categorie Nom de la catégorie, condition de renvoie
+ * @return array Tableau de renvoie du HTML et du score
  */
 
 function find_infos($total_JSON_array, $ville, $categorie) {
