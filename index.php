@@ -21,12 +21,38 @@ include_once './functions.php';
     <link rel="stylesheet" href="./assets/style.css">
 </head>
 
-<body class="col-lg-10">
+<body>
 
+   <!-- Navbar -->
+   <nav class="navbar sticky-top navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="çaarrive.png" width="30" height="30" class="d-inline-block align-top" alt="logo is comming">
+              Data City census France
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Datasets</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Qui somme-nous ?</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <?php
     // Obtenir le nom de tous les fichiers contenus dans le repertoire 'data'
     $content_repo = get_all_file_names('./data/');
-    
+
     // Avec chacun des fichiers, remplir le tableau '$all_JSON_content',
     // il contient dorénavant l'ensemble de la data issue de tous les fichiers
     $all_JSON_content = [];
@@ -43,6 +69,8 @@ include_once './functions.php';
     <h1>Data census France</h1>
 
     <p><?= count($content_repo); ?> jeux de données analysés pour <?= count($tab_villes); ?> villes.</p>
+
+    <div class="cParallaxe"></div>
 
     <table class="table" id="tab">
         <thead class="thead-dark">
@@ -90,7 +118,7 @@ include_once './functions.php';
         $(document).ready( function () {
             var table = $('#tab').DataTable({
                 paging: false
-            });            
+            });
         });
 
         // activation des Poppovers

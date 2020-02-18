@@ -32,3 +32,11 @@ h2 {
 .little-list-group {
     font-size: 12px;
 }
+.cParallaxe {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 500px;
+  background-image: url('img/bg/background.jpg');
+}
