@@ -49,9 +49,12 @@ if (!isset($_GET) || empty($_GET['view']) ||
     <ul class="list-group my-2">
     <?php
     // recherche...
-    $all_fields = CSV_file_to_array('./fields.csv', 0); //... des champs d'information
-    $all_fields_name = CSV_file_to_array('./fields.csv', 1); //... et de leur nom complet
-    $i = 0;
+    $field_file = CSV_file_to_array('./fields.csv'); // récupération des lignes du CSV contenant toutes les infos
+    $all_fields = $field_file[0]; //... des champs d'information
+    $all_fields_name = $field_file[1]; //... de leur nom complet
+    $all_fields_description = $field_file[3]; //... et de leur description
+
+    $i = 0; // incrémentation qui va permettre de récupérer les éléments pour chaque élément
 
     // pour chaque champ du JSON...    
     foreach ($JSON_file as $key => $value) {
@@ -59,17 +62,20 @@ if (!isset($_GET) || empty($_GET['view']) ||
             //... s'il s'agit bien d'un champ référencé ...
             continue;
         }
+
+        $poppover = 'data-toggle="popover" data-trigger="hover" data-placement="left"
+            data-content="' . $all_fields_description[$i] . '"';
         
         //... préparer son affichage
         switch ($value) {
             case true:
-                echo '<li class="list-group-item list-group-item-success">' . $all_fields_name[$i] . ' Oui</li>';
+                echo '<li class="list-group-item list-group-item-success" ' . $poppover . ' >' . $all_fields_name[$i] . ' Oui</li>';
                 break;
             case false:
-                echo '<li class="list-group-item list-group-item-danger">' . $all_fields_name[$i] . ' Non</li>';
+                echo '<li class="list-group-item list-group-item-danger" ' . $poppover . ' >' . $all_fields_name[$i] . ' Non</li>';
                 break;
             default:
-                echo '<li class="list-group-item list-group-item-dark">' . $all_fields_name[$i] . ' Incertain</li>';
+                echo '<li class="list-group-item list-group-item-dark" ' . $poppover . ' >' . $all_fields_name[$i] . ' Incertain</li>';
                 break;
         }
         $i++;
@@ -83,10 +89,15 @@ if (!isset($_GET) || empty($_GET['view']) ||
 
     <?php include_once './include/footer.html' ?>
 
-    <!-- <script src="./libs/jquery.min.js"></script> -->
-    <!-- <script src="./libs/popper.min.js"></script> -->
-    <!-- <script src="./libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="./libs/bootstrap/js/bootstrap.min.js"></script> -->
+    <script src="./libs/jquery.min.js"></script>
+    <script src="./libs/popper.min.js"></script>
+    <script src="./libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="./libs/bootstrap/js/bootstrap.min.js"></script>
+
+    <script>
+        // activation des Poppovers
+        $('[data-toggle="popover"]').popover({ trigger: "hover" });
+    </script>
 
 </body>
 

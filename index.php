@@ -81,7 +81,6 @@ include_once './functions.php';
     <script src="./libs/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="./libs/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-    <script src="//cdn.datatables.net/plug-ins/1.10.20/api/sum().js"></script>
 
     <script src="./assets/table.js"></script>
 

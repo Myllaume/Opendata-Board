@@ -29,11 +29,11 @@ function JSON_file_to_array($path) {
 /**
  * Obtenir un tableau d'un fichier CSV
  * @param string $path Chemin du fichier vers le fichier CSV a transformer
- * @param int $line Ligne du CSV à retourner
- * @return array Tableau contenant les données d'une ligne du fichier CSV
+ * @return array Tableau contenant les lignes du fichier CSV :
+ * la key [0] donnera accès aux données de la ligne 1 du fichier
  */
 
-function CSV_file_to_array($path, $line) {
+function CSV_file_to_array($path) {
     $return_tab = [];
 
     $csv_file = file_get_contents($path);
@@ -44,7 +44,7 @@ function CSV_file_to_array($path, $line) {
         array_push($return_tab, $row);
     }
     
-    return $return_tab[$line];
+    return $return_tab;
 }
 
 /**
@@ -83,8 +83,10 @@ function find_infos($total_JSON_array, $ville, $categorie) {
 
     $tab_infos = [];
 
-    // lecture du CSV contenant l'ensemble des champs d'info
-    $all_fields = CSV_file_to_array('./fields.csv', 0);
+    // lecture du CSV
+    $field_file = CSV_file_to_array('./fields.csv');
+
+    $all_fields = $field_file[0];
 
     $id_file = '';
 
@@ -107,9 +109,11 @@ function find_infos($total_JSON_array, $ville, $categorie) {
 
     $i = 0;
 
-    // lecture du CSV contenant les noms complets des champs d'info
-    $all_fields_name = CSV_file_to_array('./fields.csv', 1);
-    $all_fields_score = CSV_file_to_array('./fields.csv', 2);
+    $field_file = CSV_file_to_array('./fields.csv');
+    // liste des noms complets des champs d'info
+    $all_fields_name = $field_file[1];
+    // liste des scores
+    $all_fields_score = $field_file[2];
 
     foreach ($tab_infos as $tab_index => $value) {
         // pour chaque information stockée
