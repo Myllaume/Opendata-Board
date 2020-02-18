@@ -109,6 +109,7 @@ function find_infos($total_JSON_array, $ville, $categorie) {
 
     // lecture du CSV contenant les noms complets des champs d'info
     $all_fields_name = CSV_file_to_array('./fields.csv', 1);
+    $all_fields_score = CSV_file_to_array('./fields.csv', 2);
 
     foreach ($tab_infos as $tab_index => $value) {
         // pour chaque information stockée
@@ -117,7 +118,7 @@ function find_infos($total_JSON_array, $ville, $categorie) {
             case true:
                 $fields_view .= '<span class=\'field-color field-color--yes\'></span>';
                 $popover_content .= '<li class=\'list-group-item list-group-item-success\'>' . $all_fields_name[$i] . ' : Oui</li>';
-                $score++;
+                $score += $all_fields_score[$i];
                 break;
             case false:
                 $fields_view .= '<span class=\'field-color field-color--no\'></span>';
