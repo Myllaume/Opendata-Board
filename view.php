@@ -49,8 +49,8 @@ if (!isset($_GET) || empty($_GET['view']) ||
     <ul class="list-group my-2">
     <?php
     // recherche...
-    $all_fields = CSV_file_to_array('./fields.csv'); //... des champs d'information
-    $all_fields_name = CSV_file_to_array('./fields_name.csv'); //... et de leur nom complet
+    $all_fields = CSV_file_to_array('./fields.csv', 0); //... des champs d'information
+    $all_fields_name = CSV_file_to_array('./fields.csv', 1); //... et de leur nom complet
     $i = 0;
 
     // pour chaque champ du JSON...    

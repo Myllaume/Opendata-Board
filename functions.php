@@ -22,14 +22,18 @@ function JSON_file_to_array($JSON_file_path) {
     return $json_file;
 }
 
-/**
- * Obtenir un tableau d'une fichier CSV
- */
+function CSV_file_to_array($CSV_file_path, $line) {
+    $return_tab = [];
 
-function CSV_file_to_array($CSV_file_path) {
     $csv_file = file_get_contents($CSV_file_path);
-    $csv_file = str_getcsv($csv_file, ",");
-    return $csv_file;
+    $CSV_rows = str_getcsv($csv_file, "\n");
+
+    foreach($CSV_rows as &$row) {
+        $row = str_getcsv($row, ",");
+        array_push($return_tab, $row);
+    }
+    
+    return $return_tab[$line];
 }
 
 /**
@@ -61,7 +65,7 @@ function find_infos($total_JSON_array, $ville, $categorie) {
     $tab_infos = [];
 
     // lecture du CSV contenant l'ensemble des champs d'info
-    $all_fields = CSV_file_to_array('./fields.csv');
+    $all_fields = CSV_file_to_array('./fields.csv', 0);
 
     $id_file = '';
 
@@ -85,7 +89,7 @@ function find_infos($total_JSON_array, $ville, $categorie) {
     $i = 0;
 
     // lecture du CSV contenant les noms complets des champs d'info
-    $all_fields_name = CSV_file_to_array('./fields_name.csv');
+    $all_fields_name = CSV_file_to_array('./fields.csv', 1);
 
     foreach ($tab_infos as $tab_index => $value) {
         // pour chaque information stockée

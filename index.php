@@ -1,5 +1,7 @@
 <?php
 // import des fonctions PHP
+ini_set('display_errors','on');
+error_reporting(E_ALL);
 include_once './functions.php';
 ?>
 
@@ -70,6 +72,21 @@ include_once './functions.php';
             <?php endforeach; ?>
         </tbody>
     </table>
+
+    <pre>
+    <?php
+    // $lololol = CSV_file_to_array('./fields_name.csv');
+    $csv_file = file_get_contents('./fields_all.csv');
+    $Data = str_getcsv($csv_file, "\n");
+    $tabtab = [];
+     //parse the rows
+    foreach($Data as &$Row) {
+        $Row = str_getcsv($Row, ";");
+        array_push($tabtab, $Row);
+    } //parse the items in rows
+    print_r($tabtab[1]);
+    ?>
+    </pre>
 
     <?php include_once './include/footer.html' ?>
 
