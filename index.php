@@ -49,7 +49,7 @@ include_once './functions.php';
             <tr>
                 <th scope="col">Ville</th>
                 <?php foreach ($tab_categories as $categorie): ?>
-                <th><?= $categorie ?></th>
+                <th><span class="text-rotate"><?= $categorie ?></span></th>
                 <?php endforeach; ?>
                 <th>Total</th>
             </tr>

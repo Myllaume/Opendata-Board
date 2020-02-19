@@ -6,10 +6,21 @@ h2 {
     margin: 10px 0 20px 0;
 }
 
+.text-rotate {
+    writing-mode: vertical-rl;
+    transform: rotate(200deg);
+}
+
+.sum-col {
+    font-size: 0px;
+    padding: 2px !important;
+    height: 50px;
+}
+
 .field-color {
     display: inline-block;
-    width: 4px;
-    height: 15px;
+    width: 5px;
+    height: 50px;
     margin: 0 1px;
 }
 
@@ -23,10 +34,6 @@ h2 {
 
 .field-color--unsure {
     background-color: gray;
-}
-
-.field-color--no-data {
-    background-color: black;
 }
 
 .little-list-group {
