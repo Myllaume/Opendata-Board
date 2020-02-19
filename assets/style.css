@@ -19,9 +19,9 @@ h2 {
 
 .field-color {
     display: inline-block;
-    width: 5px;
+    width: calc(100% / 8);
     height: 50px;
-    margin: 0 1px;
+    margin: 0px;
 }
 
 .field-color--yes {

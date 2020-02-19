@@ -20,6 +20,12 @@ $('.total-col').each(function( i ) { // pour chaque cellule de total...
         })
         totalCell.text(totalRow); // mettre le total dans la cellule de total.
         totalCell.css('background-color', 'rgba(51, 212, 255, ' + (totalRow / index) / 100 + ')');
+        totalCell.popover({
+            title: 'Moyenne',
+            content: totalRow / index,
+            trigger: 'hover',
+            placement: 'left'
+        });
         index = 0;
     })
 })
