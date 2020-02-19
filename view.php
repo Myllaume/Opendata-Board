@@ -6,8 +6,8 @@ $content_repo = get_all_file_names('./data/');
 
 if (!isset($_GET) || empty($_GET['view']) ||
     !in_array($_GET['view'] . '.json', $content_repo)) {
-    // s'il n'y a pas de GET(view) ou qu'il n'est pas dans la liste des fichier
-    // renvoie du client et interruption du chargement de la page
+    // s'il n'y a pas de GET(view) ou qu'il n'est pas dans la liste des fichiers :
+    // renvoie du client à l'accueil et interruption du chargement de la page
     header("Location: ./index.php");
     exit;
 }
@@ -35,12 +35,11 @@ $JSON_file = JSON_file_to_array('./data/' . $_GET['view'] . '.json');
 <body class="p-2 col-sm-7">
 
     <?php
-    if (isset($JSON_file['lieu']) && !empty($JSON_file['lieu'])
-        && isset($JSON_file['categorie']) && !empty($JSON_file['categorie'])
-        && isset($JSON_file['annee']) && !empty($JSON_file['annee'])):
+    if (isset($JSON_file['ville']) && !empty($JSON_file['ville'])
+        && isset($JSON_file['categorie']) && !empty($JSON_file['categorie'])):
     ?>
 
-    <h1><?= $JSON_file['lieu'] ?> / <?= $JSON_file['categorie'] ?> / <?= $JSON_file['annee'] ?></h1>
+    <h1><?= $JSON_file['ville'] ?> de <?= $JSON_file['departement'] ?> / <?= $JSON_file['categorie'] ?></h1>
 
     <?php
     endif;
@@ -70,16 +69,6 @@ $JSON_file = JSON_file_to_array('./data/' . $_GET['view'] . '.json');
     endif;
     ?>
 
-    <?php
-    if (isset($JSON_file['data_format']) && !empty($JSON_file['data_format'])):
-    ?>
-
-    <p>Formats disponibles : <?= $JSON_file['data_format'] ?>.</p>
-
-    <?php
-    endif;
-    ?>
-
     <ul class="list-group my-2">
     <?php
     // recherche...
@@ -100,9 +89,9 @@ $JSON_file = JSON_file_to_array('./data/' . $_GET['view'] . '.json');
         $poppover = 'data-toggle="popover" data-trigger="hover" data-placement="left"
             data-content="' . $all_fields_description[$i] . '"';
 
-        if ($value === true) {
+        if ($value === "true") {
             echo '<li class="list-group-item list-group-item-success" ' . $poppover . ' >' . $all_fields_name[$i] . ' Oui</li>';
-        } elseif ($value === false) {
+        } elseif ($value === "false") {
             echo '<li class="list-group-item list-group-item-danger" ' . $poppover . ' >' . $all_fields_name[$i] . ' Non</li>';
         } else {
             echo '<li class="list-group-item list-group-item-dark" ' . $poppover . ' >' . $all_fields_name[$i] . ' Incertain</li>';
@@ -112,17 +101,6 @@ $JSON_file = JSON_file_to_array('./data/' . $_GET['view'] . '.json');
     }
     ?>
     </ul>
-
-    <?php
-    if (isset($JSON_file['contributor']) && !empty($JSON_file['contributor'])
-        && isset($JSON_file['date_last_edit']) && !empty($JSON_file['date_last_edit'])):
-    ?>
-
-    <p>Rapport modifié par <?= $JSON_file['contributor'] ?> le <?= $JSON_file['date_last_edit'] ?>.</p>
-
-    <?php
-    endif;
-    ?>
 
     <a href="<?= $JSON_file['data_loc'] ?>" target="_target" class="btn btn-primary my-2">Accéder aux données</a>
 

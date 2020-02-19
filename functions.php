@@ -113,7 +113,7 @@ function find_infos($total_JSON_array, $ville, $categorie) {
         // pour chaque champs...
         foreach ($total_JSON_array as $tab_index => $value) {
             // chercher dans chaque fichier JSON ce champ...
-            if ($value['categorie'] == $categorie && $value['lieu'] == $ville) {
+            if ($value['categorie'] == $categorie && $value['ville'] == $ville) {
                 // si le JSON a la bonne catégorie et la bonne ville
                 array_push($tab_infos, $value[$field]); // stockage de l'information
                 $id_file = $value['id'];
@@ -138,11 +138,11 @@ function find_infos($total_JSON_array, $ville, $categorie) {
         // pour chaque information stockée
         // générer l'affichage et le score
 
-        if ($value === true) {
+        if ($value === "true") {
             $fields_view .= '<span class=\'field-color field-color--yes\'></span>';
             $popover_content .= '<li class=\'list-group-item list-group-item-success\'>' . $all_fields_name[$i] . ' : Oui</li>';
             $score += $all_fields_score[$i];
-        } elseif ($value === false) {
+        } elseif ($value === "false") {
             $fields_view .= '<span class=\'field-color field-color--no\'></span>';
             $popover_content .= '<li class=\'list-group-item list-group-item-danger\'>' . $all_fields_name[$i] . ' : Non</li>';
         } else {
@@ -157,4 +157,15 @@ function find_infos($total_JSON_array, $ville, $categorie) {
     title="Statistiques" data-content="<ul class=\'list-group || little-list-group\'>' . $popover_content . '<ul>">' . $fields_view . '</div></a>';
 
     return ['HTML' => $html, 'score' => $score];
+}
+
+function mass_JSON_create($path) {
+    $mass_json_file = JSON_file_to_array($path);
+
+    foreach ($mass_json_file as $key => $json_unit) {
+        if ($json_unit['is_exist'] === "false") {
+            continue;
+        }
+        file_put_contents('./data/' . $json_unit['id'] . '.json', json_encode($json_unit, JSON_UNESCAPED_UNICODE));
+    }
 }

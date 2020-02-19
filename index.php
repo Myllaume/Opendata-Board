@@ -34,7 +34,7 @@ include_once './functions.php';
         // si le fichier n'existe pas
         // si les champs 'lieu' ou 'categorie' du JSON sont vides, le fichier n'est pas
         // enregistré pour être affiché dans le tableau
-        if (!$json_content || empty($json_content['lieu']) || empty($json_content['categorie'])) {
+        if (!$json_content || empty($json_content['ville']) || empty($json_content['categorie'])) {
             continue;
         }
 
@@ -44,7 +44,7 @@ include_once './functions.php';
     // Extraire la liste des catégories et villes stockées,
     // en fonction de leur clé
     $tab_categories = find_all_keys($all_JSON_content, 'categorie');
-    $tab_villes = find_all_keys($all_JSON_content, 'lieu');
+    $tab_villes = find_all_keys($all_JSON_content, 'ville');
     ?>
 
     <h1>Data census France</h1>
