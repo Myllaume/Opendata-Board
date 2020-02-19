@@ -1,7 +1,5 @@
 <?php
 // import des fonctions PHP
-ini_set('display_errors','on');
-error_reporting(E_ALL);
 include_once './functions.php';
 ?>
 

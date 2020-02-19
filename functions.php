@@ -48,6 +48,20 @@ function CSV_file_to_array($path) {
 }
 
 /**
+ * Obtenir du code HTML par l'inteprêtation d'un fichier markdown
+ * @param string $path Chemin du fichier vers le fichier markdown a transformer
+ * @return string Code HTML à inteprêter par le navigateur
+ */
+
+function markdown_to_string($path) {
+    $markdown_content = file_get_contents($path);
+
+    include_once './libs/parsedown/Parsedown.php';
+    $parsedown = new Parsedown();
+    return $parsedown->text($markdown_content);
+}
+
+/**
  * Pour un tableau JSON entré : trouver les entrées correspondany
  * à la clé entrée
  * @param array $total_JSON_array Tableau contenant toutes les données JSON du site
