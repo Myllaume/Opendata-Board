@@ -11,6 +11,10 @@ if (!isset($_GET) || empty($_GET['view']) ||
     header("Location: ./index.php");
     exit;
 }
+
+// stockage des informations du JSON
+// '$_GET['view']' est le nom du fichier auquel il suffit d'ajouter le chemin et l'extension
+$JSON_file = JSON_file_to_array('./data/' . $_GET['view'] . '.json');
 ?>
 
 <!DOCTYPE html>
@@ -31,20 +35,50 @@ if (!isset($_GET) || empty($_GET['view']) ||
 <body class="p-2 col-sm-7">
 
     <?php
-    // stockage des informations du JSON
-    // '$_GET['view']' est le nom du fichier auquel il suffit d'ajouter le chemin et l'extension
-    $JSON_file = JSON_file_to_array('./data/' . $_GET['view'] . '.json');
+    if (isset($JSON_file['lieu']) && !empty($JSON_file['lieu'])
+        && isset($JSON_file['categorie']) && !empty($JSON_file['categorie'])
+        && isset($JSON_file['annee']) && !empty($JSON_file['annee'])):
     ?>
 
     <h1><?= $JSON_file['lieu'] ?> / <?= $JSON_file['categorie'] ?> / <?= $JSON_file['annee'] ?></h1>
+
+    <?php
+    endif;
+    ?>
 
     <a href="./index.php" class="btn btn-secondary my-2">Retour à l'accueil</a>
 
     <h2>Description</h2>
 
+    <?php
+    if (isset($JSON_file['remarques']) && !empty($JSON_file['remarques'])):
+    ?>
+
     <p><?= $JSON_file['remarques'] ?></p>
+
+    <?php
+    endif;
+    ?>
+
+    <?php
+    if (isset($JSON_file['institution']) && !empty($JSON_file['institution'])):
+    ?>
+
     <p>Mis à disposition par <?= $JSON_file['institution'] ?>.</p>
+
+    <?php
+    endif;
+    ?>
+
+    <?php
+    if (isset($JSON_file['data_format']) && !empty($JSON_file['data_format'])):
+    ?>
+
     <p>Formats disponibles : <?= $JSON_file['data_format'] ?>.</p>
+
+    <?php
+    endif;
+    ?>
 
     <ul class="list-group my-2">
     <?php
@@ -65,25 +99,30 @@ if (!isset($_GET) || empty($_GET['view']) ||
 
         $poppover = 'data-toggle="popover" data-trigger="hover" data-placement="left"
             data-content="' . $all_fields_description[$i] . '"';
-        
-        //... préparer son affichage
-        switch ($value) {
-            case true:
-                echo '<li class="list-group-item list-group-item-success" ' . $poppover . ' >' . $all_fields_name[$i] . ' Oui</li>';
-                break;
-            case false:
-                echo '<li class="list-group-item list-group-item-danger" ' . $poppover . ' >' . $all_fields_name[$i] . ' Non</li>';
-                break;
-            default:
-                echo '<li class="list-group-item list-group-item-dark" ' . $poppover . ' >' . $all_fields_name[$i] . ' Incertain</li>';
-                break;
+
+        if ($value === true) {
+            echo '<li class="list-group-item list-group-item-success" ' . $poppover . ' >' . $all_fields_name[$i] . ' Oui</li>';
+        } elseif ($value === false) {
+            echo '<li class="list-group-item list-group-item-danger" ' . $poppover . ' >' . $all_fields_name[$i] . ' Non</li>';
+        } else {
+            echo '<li class="list-group-item list-group-item-dark" ' . $poppover . ' >' . $all_fields_name[$i] . ' Incertain</li>';
         }
+
         $i++;
     }
     ?>
     </ul>
 
-    <p>Données modifiées par <?= $JSON_file['contributor'] ?> le <?= $JSON_file['date_last_edit'] ?>.</p>
+    <?php
+    if (isset($JSON_file['contributor']) && !empty($JSON_file['contributor'])
+        && isset($JSON_file['date_last_edit']) && !empty($JSON_file['date_last_edit'])):
+    ?>
+
+    <p>Rapport modifié par <?= $JSON_file['contributor'] ?> le <?= $JSON_file['date_last_edit'] ?>.</p>
+
+    <?php
+    endif;
+    ?>
 
     <a href="<?= $JSON_file['data_loc'] ?>" target="_target" class="btn btn-primary my-2">Accéder aux données</a>
 

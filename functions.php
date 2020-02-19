@@ -22,6 +22,11 @@ function get_all_file_names($path) {
 
 function JSON_file_to_array($path) {
     $json_file = file_get_contents($path);
+
+    if (!$json_file) {
+        return false;
+    }
+
     $json_file = json_decode($json_file, true);
     return $json_file;
 }
@@ -132,20 +137,17 @@ function find_infos($total_JSON_array, $ville, $categorie) {
     foreach ($tab_infos as $tab_index => $value) {
         // pour chaque information stockée
         // générer l'affichage et le score
-        switch ($value) {
-            case true:
-                $fields_view .= '<span class=\'field-color field-color--yes\'></span>';
-                $popover_content .= '<li class=\'list-group-item list-group-item-success\'>' . $all_fields_name[$i] . ' : Oui</li>';
-                $score += $all_fields_score[$i];
-                break;
-            case false:
-                $fields_view .= '<span class=\'field-color field-color--no\'></span>';
-                $popover_content .= '<li class=\'list-group-item list-group-item-danger\'>' . $all_fields_name[$i] . ' : Non</li>';
-                break;
-            default:
-                $fields_view .= '<span class=\'field-color field-color--no-data\'></span>';
-                $popover_content .= '<li class=\'list-group-item list-group-item-dark\'>' . $all_fields_name[$i] . ' : Incertain</li>';
-                break;
+
+        if ($value === true) {
+            $fields_view .= '<span class=\'field-color field-color--yes\'></span>';
+            $popover_content .= '<li class=\'list-group-item list-group-item-success\'>' . $all_fields_name[$i] . ' : Oui</li>';
+            $score += $all_fields_score[$i];
+        } elseif ($value === false) {
+            $fields_view .= '<span class=\'field-color field-color--no\'></span>';
+            $popover_content .= '<li class=\'list-group-item list-group-item-danger\'>' . $all_fields_name[$i] . ' : Non</li>';
+        } else {
+            $fields_view .= '<span class=\'field-color field-color--unsure\'></span>';
+            $popover_content .= '<li class=\'list-group-item list-group-item-dark\'>' . $all_fields_name[$i] . ' : Incertain</li>';
         }
 
         $i++;

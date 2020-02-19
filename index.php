@@ -28,9 +28,18 @@ include_once './functions.php';
     // Avec chacun des fichiers, remplir le tableau '$all_JSON_content',
     // il contient dorénavant l'ensemble de la data issue de tous les fichiers
     $all_JSON_content = [];
-    foreach ($content_repo as $tab_index => $JSON_file_name):
-        array_push($all_JSON_content, JSON_file_to_array('./data/' . $JSON_file_name));
-    endforeach;
+    foreach ($content_repo as $tab_index => $JSON_file_name) {
+        $json_content = JSON_file_to_array('./data/' . $JSON_file_name);
+
+        // si le fichier n'existe pas
+        // si les champs 'lieu' ou 'categorie' du JSON sont vides, le fichier n'est pas
+        // enregistré pour être affiché dans le tableau
+        if (!$json_content || empty($json_content['lieu']) || empty($json_content['categorie'])) {
+            continue;
+        }
+
+        array_push($all_JSON_content, $json_content);
+    }
 
     // Extraire la liste des catégories et villes stockées,
     // en fonction de leur clé
