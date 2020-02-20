@@ -70,7 +70,13 @@ include_once './functions.php';
 
     <p><?= count($content_repo); ?> jeux de données analysés pour <?= count($tab_villes); ?> villes.</p>
 
-    <div class="cParallaxe"></div>
+    <div class="cParallaxe">
+      <div class="align-self-center">
+<a href="index.php" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Primary link</a>
+      </div>
+    </div>
+
+
 
     <table class="table" id="tab">
         <thead class="thead-dark">

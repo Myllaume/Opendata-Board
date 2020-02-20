@@ -1,5 +1,6 @@
 h1 {
     margin: 20px 0 30px 0;
+    text-align: center;
 }
 
 h2 {
@@ -37,6 +38,6 @@ h2 {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: 500px;
-  background-image: url('img/bg/background.jpg');
+  min-height: 700px;
+  background-image: url('img/bg/bg2.jpg');
 }
