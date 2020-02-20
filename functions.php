@@ -154,10 +154,16 @@ function find_infos($total_JSON_array, $ville, $categorie) {
     }
 
     $html = '<a href="./view.php?view=' . $id_file . '"><div data-toggle="popover" data-trigger="hover" data-placement="right"
-    title="Statistiques" data-content="<ul class=\'list-group || little-list-group\'>' . $popover_content . '<ul>">' . $fields_view . '</div></a>';
+    title="Statistiques" data-content="<ul class=\'list-group || little-list-group\'>' . $popover_content . '</ul> <div class=\'alert alert-primary mt-1\'>Score : ' . $score . '</div>">' . $fields_view . '</div></a>';
 
     return ['HTML' => $html, 'score' => $score];
 }
+
+/**
+ * Pour un fichier JSON entré, génération d'un fichier JSON pour chaque
+ * objet qu'il contient dans le repertoire 'data'
+ * @param string $path Chemin vers le fichier JSON servant à la génération
+ */
 
 function mass_JSON_create($path) {
     $mass_json_file = JSON_file_to_array($path);
