@@ -66,7 +66,7 @@ include_once './functions.php';
             <tr>
                 <th scope="row"><?= $ville ?></th>
                 <?php foreach ($tab_categories as $categorie): ?>
-                <td class="sum-col">
+                <td class="sum-cell">
                     <?php
                     $infos = find_infos($all_JSON_content, $ville, $categorie);
                     echo $infos['HTML']; // lien et Poppover du set de données
@@ -74,10 +74,19 @@ include_once './functions.php';
                     ?>
                 </td>
                 <?php endforeach; ?>
-                <th class="total-col"></th>
+                <th class="total-row">0</th>
             </tr>
             <?php endforeach; ?>
         </tbody>
+        <tfoot>
+            <tr>
+                <th>Moyenne : </th>
+                <?php foreach ($tab_categories as $categorie): ?>
+                <th class="total-col">0</th>
+                <?php endforeach; ?>
+                <th></th>
+            </tr>
+        </tfoot>
     </table>
 
     <?php include_once './include/footer.html' ?>
@@ -92,11 +101,14 @@ include_once './functions.php';
     <script src="./assets/table.js"></script>
 
     <script>
-        // actionvation du tableau
         $(document).ready( function () {
+            // activation du tableau
             var table = $('#tab').DataTable({
                 paging: false
-            });            
+            });
+            
+            // calcul et affichage des totaux
+            showTotals();
         });
 
         // activation des Poppovers

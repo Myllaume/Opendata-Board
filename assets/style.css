@@ -11,7 +11,7 @@ h2 {
     transform: rotate(200deg);
 }
 
-.sum-col {
+.sum-cell {
     font-size: 0px;
     padding: 2px !important;
     height: 50px;
@@ -38,4 +38,12 @@ h2 {
 
 .little-list-group {
     font-size: 12px;
+}
+
+.total-col {
+    background-color: rgb(255, 187, 51);
+}
+
+.total-row {
+    background-color: rgb(51, 212, 255);
 }
