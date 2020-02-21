@@ -23,7 +23,7 @@ $JSON_file = JSON_file_to_array('./data/' . $_GET['view'] . '.json');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Datacity - Accueil</title>
+    <title><?= $JSON_file['ville'] ?> - <?= $JSON_file['categorie'] ?></title>
 
     <!-- LIBRAIRIES -->
     <link rel="stylesheet" href="./libs/bootstrap/css/bootstrap-reboot.min.css">
@@ -32,78 +32,84 @@ $JSON_file = JSON_file_to_array('./data/' . $_GET['view'] . '.json');
     <link rel="stylesheet" href="./assets/style.css">
 </head>
 
-<body class="p-2 col-sm-7">
+<body>
 
-    <?php
-    if (isset($JSON_file['ville']) && !empty($JSON_file['ville'])
-        && isset($JSON_file['departement']) && !empty($JSON_file['departement'])
-        && isset($JSON_file['categorie']) && !empty($JSON_file['categorie'])):
-    ?>
+    <?php include_once './include/navigation.php'; ?>
 
-    <h1><?= $JSON_file['ville'] ?> <small>de <?= $JSON_file['departement'] ?></small><br/><?= $JSON_file['categorie'] ?></h1>
+    <main class="col-sm-7 mx-auto">
 
-    <?php
-    endif;
-    ?>
+        <?php
+        if (isset($JSON_file['ville']) && !empty($JSON_file['ville'])
+            && isset($JSON_file['departement']) && !empty($JSON_file['departement'])
+            && isset($JSON_file['categorie']) && !empty($JSON_file['categorie'])):
+        ?>
 
-    <?php
-    if (isset($JSON_file['date_data_upload']) && !empty($JSON_file['date_data_upload'])):
-    ?>
+        <h1><?= $JSON_file['ville'] ?> <small>de <?= $JSON_file['departement'] ?></small><br/><?= $JSON_file['categorie'] ?></h1>
 
-    <h2>Données mises en ligne le <?= $JSON_file['date_data_upload'] ?></h2>
+        <?php
+        endif;
+        ?>
 
-    <?php
-    endif;
-    ?>
+        <?php
+        if (isset($JSON_file['date_data_upload']) && !empty($JSON_file['date_data_upload'])):
+        ?>
 
-    <a href="./index.php" class="btn btn-secondary my-2">Retour à l'accueil</a>
+        <h2>Données mises en ligne le <?= $JSON_file['date_data_upload'] ?></h2>
 
-    <h2>Description</h2>
+        <?php
+        endif;
+        ?>
 
-    <?php
-    if (isset($JSON_file['institution']) && !empty($JSON_file['institution'])):
-    ?>
+        <a href="./index.php" class="btn btn-secondary my-2">Retour à l'accueil</a>
 
-    <p>Mis à disposition par <?= $JSON_file['institution'] ?>.</p>
+        <h2>Description</h2>
 
-    <?php
-    endif;
-    ?>
+        <?php
+        if (isset($JSON_file['institution']) && !empty($JSON_file['institution'])):
+        ?>
 
-    <ul class="list-group my-2">
-    <?php
-    // recherche...
-    $field_file = CSV_file_to_array('./fields.csv'); // récupération des lignes du CSV contenant toutes les infos
-    $all_fields = $field_file[0]; //... des champs d'information
-    $all_fields_name = $field_file[1]; //... de leur nom complet
-    $all_fields_description = $field_file[3]; //... et de leur description
+        <p>Mis à disposition par <?= $JSON_file['institution'] ?>.</p>
 
-    $i = 0; // incrémentation qui va permettre de récupérer les éléments pour chaque élément
+        <?php
+        endif;
+        ?>
 
-    // pour chaque champ du JSON...    
-    foreach ($JSON_file as $key => $value) {
-        if (!in_array($key, $all_fields)) {
-            //... s'il s'agit bien d'un champ référencé ...
-            continue;
+        <ul class="list-group my-2">
+        <?php
+        // recherche...
+        $field_file = CSV_file_to_array('./fields.csv'); // récupération des lignes du CSV contenant toutes les infos
+        $all_fields = $field_file[0]; //... des champs d'information
+        $all_fields_name = $field_file[1]; //... de leur nom complet
+        $all_fields_description = $field_file[3]; //... et de leur description
+
+        $i = 0; // incrémentation qui va permettre de récupérer les éléments pour chaque élément
+
+        // pour chaque champ du JSON...    
+        foreach ($JSON_file as $key => $value) {
+            if (!in_array($key, $all_fields)) {
+                //... s'il s'agit bien d'un champ référencé ...
+                continue;
+            }
+
+            $poppover = 'data-toggle="popover" data-trigger="hover" data-placement="left"
+                data-content="' . $all_fields_description[$i] . '"';
+
+            if ($value === "true" || $value === true) {
+                echo '<li class="list-group-item list-group-item-success" ' . $poppover . ' >' . $all_fields_name[$i] . ' Oui</li>';
+            } elseif ($value === "false" || $value === false) {
+                echo '<li class="list-group-item list-group-item-danger" ' . $poppover . ' >' . $all_fields_name[$i] . ' Non</li>';
+            } else {
+                echo '<li class="list-group-item list-group-item-dark" ' . $poppover . ' >' . $all_fields_name[$i] . ' Incertain</li>';
+            }
+
+            $i++;
         }
+        ?>
+        </ul>
 
-        $poppover = 'data-toggle="popover" data-trigger="hover" data-placement="left"
-            data-content="' . $all_fields_description[$i] . '"';
+        <a href="<?= $JSON_file['data_loc'] ?>" target="_target" class="btn btn-primary my-2">Accéder aux données</a>
 
-        if ($value === "true" || $value === true) {
-            echo '<li class="list-group-item list-group-item-success" ' . $poppover . ' >' . $all_fields_name[$i] . ' Oui</li>';
-        } elseif ($value === "false" || $value === false) {
-            echo '<li class="list-group-item list-group-item-danger" ' . $poppover . ' >' . $all_fields_name[$i] . ' Non</li>';
-        } else {
-            echo '<li class="list-group-item list-group-item-dark" ' . $poppover . ' >' . $all_fields_name[$i] . ' Incertain</li>';
-        }
-
-        $i++;
-    }
-    ?>
-    </ul>
-
-    <a href="<?= $JSON_file['data_loc'] ?>" target="_target" class="btn btn-primary my-2">Accéder aux données</a>
+    </main>
 
     <?php include_once './include/footer.html' ?>
 
