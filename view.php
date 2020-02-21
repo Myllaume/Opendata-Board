@@ -6,11 +6,15 @@ $content_repo = get_all_file_names('./data/');
 
 if (!isset($_GET) || empty($_GET['view']) ||
     !in_array($_GET['view'] . '.json', $content_repo)) {
-    // s'il n'y a pas de GET(view) ou qu'il n'est pas dans la liste des fichier
-    // renvoie du client et interruption du chargement de la page
+    // s'il n'y a pas de GET(view) ou qu'il n'est pas dans la liste des fichiers :
+    // renvoie du client à l'accueil et interruption du chargement de la page
     header("Location: ./index.php");
     exit;
 }
+
+// stockage des informations du JSON
+// '$_GET['view']' est le nom du fichier auquel il suffit d'ajouter le chemin et l'extension
+$JSON_file = JSON_file_to_array('./data/' . $_GET['view'] . '.json');
 ?>
 
 <!DOCTYPE html>
@@ -31,27 +35,50 @@ if (!isset($_GET) || empty($_GET['view']) ||
 <body class="p-2 col-sm-7">
 
     <?php
-    // stockage des informations du JSON
-    // '$_GET['view']' est le nom du fichier auquel il suffit d'ajouter le chemin et l'extension
-    $JSON_file = JSON_file_to_array('./data/' . $_GET['view'] . '.json');
+    if (isset($JSON_file['ville']) && !empty($JSON_file['ville'])
+        && isset($JSON_file['departement']) && !empty($JSON_file['departement'])
+        && isset($JSON_file['categorie']) && !empty($JSON_file['categorie'])):
     ?>
 
-    <h1><?= $JSON_file['lieu'] ?> / <?= $JSON_file['categorie'] ?> / <?= $JSON_file['annee'] ?></h1>
+    <h1><?= $JSON_file['ville'] ?> <small>de <?= $JSON_file['departement'] ?></small><br/><?= $JSON_file['categorie'] ?></h1>
+
+    <?php
+    endif;
+    ?>
+
+    <?php
+    if (isset($JSON_file['date_data_upload']) && !empty($JSON_file['date_data_upload'])):
+    ?>
+
+    <h2>Données mises en ligne le <?= $JSON_file['date_data_upload'] ?></h2>
+
+    <?php
+    endif;
+    ?>
 
     <a href="./index.php" class="btn btn-secondary my-2">Retour à l'accueil</a>
 
     <h2>Description</h2>
 
-    <p><?= $JSON_file['remarques'] ?></p>
+    <?php
+    if (isset($JSON_file['institution']) && !empty($JSON_file['institution'])):
+    ?>
+
     <p>Mis à disposition par <?= $JSON_file['institution'] ?>.</p>
-    <p>Formats disponibles : <?= $JSON_file['data_format'] ?>.</p>
+
+    <?php
+    endif;
+    ?>
 
     <ul class="list-group my-2">
     <?php
     // recherche...
-    $all_fields = CSV_file_to_array('./fields.csv', 0); //... des champs d'information
-    $all_fields_name = CSV_file_to_array('./fields.csv', 1); //... et de leur nom complet
-    $i = 0;
+    $field_file = CSV_file_to_array('./fields.csv'); // récupération des lignes du CSV contenant toutes les infos
+    $all_fields = $field_file[0]; //... des champs d'information
+    $all_fields_name = $field_file[1]; //... de leur nom complet
+    $all_fields_description = $field_file[3]; //... et de leur description
+
+    $i = 0; // incrémentation qui va permettre de récupérer les éléments pour chaque élément
 
     // pour chaque champ du JSON...    
     foreach ($JSON_file as $key => $value) {
@@ -59,34 +86,36 @@ if (!isset($_GET) || empty($_GET['view']) ||
             //... s'il s'agit bien d'un champ référencé ...
             continue;
         }
-        
-        //... préparer son affichage
-        switch ($value) {
-            case true:
-                echo '<li class="list-group-item list-group-item-success">' . $all_fields_name[$i] . ' Oui</li>';
-                break;
-            case false:
-                echo '<li class="list-group-item list-group-item-danger">' . $all_fields_name[$i] . ' Non</li>';
-                break;
-            default:
-                echo '<li class="list-group-item list-group-item-dark">' . $all_fields_name[$i] . ' Incertain</li>';
-                break;
+
+        $poppover = 'data-toggle="popover" data-trigger="hover" data-placement="left"
+            data-content="' . $all_fields_description[$i] . '"';
+
+        if ($value === "true" || $value === true) {
+            echo '<li class="list-group-item list-group-item-success" ' . $poppover . ' >' . $all_fields_name[$i] . ' Oui</li>';
+        } elseif ($value === "false" || $value === false) {
+            echo '<li class="list-group-item list-group-item-danger" ' . $poppover . ' >' . $all_fields_name[$i] . ' Non</li>';
+        } else {
+            echo '<li class="list-group-item list-group-item-dark" ' . $poppover . ' >' . $all_fields_name[$i] . ' Incertain</li>';
         }
+
         $i++;
     }
     ?>
     </ul>
 
-    <p>Données modifiées par <?= $JSON_file['contributor'] ?> le <?= $JSON_file['date_last_edit'] ?>.</p>
-
     <a href="<?= $JSON_file['data_loc'] ?>" target="_target" class="btn btn-primary my-2">Accéder aux données</a>
 
     <?php include_once './include/footer.html' ?>
 
-    <!-- <script src="./libs/jquery.min.js"></script> -->
-    <!-- <script src="./libs/popper.min.js"></script> -->
-    <!-- <script src="./libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="./libs/bootstrap/js/bootstrap.min.js"></script> -->
+    <script src="./libs/jquery.min.js"></script>
+    <script src="./libs/popper.min.js"></script>
+    <script src="./libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="./libs/bootstrap/js/bootstrap.min.js"></script>
+
+    <script>
+        // activation des Poppovers
+        $('[data-toggle="popover"]').popover({ trigger: "hover" });
+    </script>
 
 </body>
 
