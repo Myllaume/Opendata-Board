@@ -15,7 +15,7 @@ include_once './functions.php';
     <link rel="stylesheet" href="./libs/bootstrap/css/bootstrap-reboot.min.css">
     <link rel="stylesheet" href="./libs/bootstrap/css/bootstrap.min.css">
 
-    <link rel="stylesheet" href="./libs/datatables.css">
+    <link rel="stylesheet" href="./libs/datatables/datatables.css">
     <link rel="stylesheet" href="./assets/style.css">
 </head>
 
