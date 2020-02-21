@@ -51,18 +51,17 @@ include_once './functions.php';
     $tab_villes = find_all_keys($all_JSON_content, 'ville');
     ?>
 
-
     <div class="cParallaxe">
+
       <div class="d-flex flex-column justify-content-around align-items-center petitbouton">
-        <p class="titre1">Data City census France</p>
-          <a href="index.php" class="btn btn-primary btn-lg active couleurb" role="button" aria-pressed="true">Acceder aux données</a>
-        <p class="corpsp col-md-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <h1 class="titre-site">Opendata Census France</h1>
+
+        <button type="button" class="btn btn-dark" onclick="scrollToTable();">Accéder aux données</button>
+
+        <p class="text-intro col-md-5">Analyse de <span class="badge badge-secondary"><?= count($content_repo); ?> jeux de données</span> ouverts portés par <span class="badge badge-secondary"><?= count($tab_villes); ?> communes françaises</span> de plus de 10 000 habitants : Horaires des transports en commun, budget administratif… 15 thématiques sont analysées dans un tableau dynamique donnant une vue d’ensemble sur l’open-data en France.</p>
       </div>
+
     </div>
-
-
-    <p><?= count($content_repo); ?> jeux de données analysés pour <?= count($tab_villes); ?> villes.</p>
-
 
     <table class="table" id="tab">
         <thead class="thead-dark">
@@ -117,12 +116,21 @@ include_once './functions.php';
         $(document).ready( function () {
             // activation du tableau
             var table = $('#tab').DataTable({
-                paging: false
+                paging: false,
+                searching: false
             });
 
             // calcul et affichage des totaux
             showTotals();
+
         });
+
+        function scrollToTable() {
+            window.scrollTo({
+                top: document.querySelector('#tab').offsetTop - 50,
+                behavior: 'smooth'
+            });
+        }
 
         // activation des Poppovers
         $('[data-toggle="popover"]').popover({ trigger: "hover", html:true });

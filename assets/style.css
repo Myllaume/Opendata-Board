@@ -1,3 +1,7 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
 h1 {
     margin: 20px 0 30px 0;
     text-align: center;
@@ -7,9 +11,14 @@ h2 {
     margin: 10px 0 20px 0;
 }
 
+.sorting {
+    border-left: blanchedalmond 1px solid;
+    border-right: blanchedalmond 1px solid;
+}
+
 .text-rotate {
     writing-mode: vertical-rl;
-    transform: rotate(200deg);
+    transform: rotate(180deg);
 }
 
 .total-col {
@@ -50,41 +59,42 @@ h2 {
 }
 
 .cParallaxe {
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  min-height: 700px;
-  background-image: url('img/bg/bg2.jpg');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: calc(100vh - 55px);
+    background-image: url('./img/background.jpg');
 }
 
 .petitbouton {
-  height : 700px;
+    height: 100%;
 }
 
 .colora {
-  background-color: #1B1B2D;
+    background-color: #1B1B2D;
 }
 
-.titre1 {
-  font-size: 60px;
-  text-align: center;
-  font-family: 'Oswald', sans-serif;
-  color: #FFFFFF;
+.titre-site {
+    font-size: 60px;
+    text-align: center;
+    font-family: 'Oswald', sans-serif;
+    color: #FFFFFF;
 }
 
-.couleurb {
-  background-color: #1B1B2D !important;
-  border-color: #1B1B2D !important;
+.text-intro {
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 20px;
+    line-height: 30px;
 }
 
-.corpsp {
-  font-family: 'Montserrat', sans-serif;
-  text-align: center;
-  color : #FFFFFF;
-  font-size: 20px;
+footer {
+    border-top: 2px solid black;
 }
 
-.hamburger{
-  width: 100%;
+footer img {
+    height: 50px;
+    border-radius: 5px;
+    margin: 0px 20px;
 }
