@@ -7,11 +7,30 @@ h2 {
     margin: 10px 0 20px 0;
 }
 
+.text-rotate {
+    writing-mode: vertical-rl;
+    transform: rotate(200deg);
+}
+
+.total-col {
+    background-color: rgb(255, 187, 51);
+}
+
+.total-row {
+    background-color: rgb(51, 212, 255);
+}
+
+.sum-cell {
+    font-size: 0px;
+    padding: 2px !important;
+    height: 50px;
+}
+
 .field-color {
     display: inline-block;
-    width: 4px;
-    height: 15px;
-    margin: 0 1px;
+    width: calc(100% / 8);
+    height: 50px;
+    margin: 0px;
 }
 
 .field-color--yes {
@@ -26,13 +45,10 @@ h2 {
     background-color: gray;
 }
 
-.field-color--no-data {
-    background-color: black;
-}
-
 .little-list-group {
     font-size: 12px;
 }
+
 .cParallaxe {
   background-attachment: fixed;
   background-position: center;

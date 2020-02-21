@@ -22,6 +22,11 @@ function get_all_file_names($path) {
 
 function JSON_file_to_array($path) {
     $json_file = file_get_contents($path);
+
+    if (!$json_file) {
+        return false;
+    }
+
     $json_file = json_decode($json_file, true);
     return $json_file;
 }
@@ -29,11 +34,11 @@ function JSON_file_to_array($path) {
 /**
  * Obtenir un tableau d'un fichier CSV
  * @param string $path Chemin du fichier vers le fichier CSV a transformer
- * @param int $line Ligne du CSV à retourner
- * @return array Tableau contenant les données d'une ligne du fichier CSV
+ * @return array Tableau contenant les lignes du fichier CSV :
+ * la key [0] donnera accès aux données de la ligne 1 du fichier
  */
 
-function CSV_file_to_array($path, $line) {
+function CSV_file_to_array($path) {
     $return_tab = [];
 
     $csv_file = file_get_contents($path);
@@ -44,7 +49,21 @@ function CSV_file_to_array($path, $line) {
         array_push($return_tab, $row);
     }
     
-    return $return_tab[$line];
+    return $return_tab;
+}
+
+/**
+ * Obtenir du code HTML par l'inteprêtation d'un fichier markdown
+ * @param string $path Chemin du fichier vers le fichier markdown a transformer
+ * @return string Code HTML à inteprêter par le navigateur
+ */
+
+function markdown_to_string($path) {
+    $markdown_content = file_get_contents($path);
+
+    include_once './libs/parsedown/Parsedown.php';
+    $parsedown = new Parsedown();
+    return $parsedown->text($markdown_content);
 }
 
 /**
@@ -83,8 +102,10 @@ function find_infos($total_JSON_array, $ville, $categorie) {
 
     $tab_infos = [];
 
-    // lecture du CSV contenant l'ensemble des champs d'info
-    $all_fields = CSV_file_to_array('./fields.csv', 0);
+    // lecture du CSV
+    $field_file = CSV_file_to_array('./fields.csv');
+
+    $all_fields = $field_file[0];
 
     $id_file = '';
 
@@ -92,7 +113,7 @@ function find_infos($total_JSON_array, $ville, $categorie) {
         // pour chaque champs...
         foreach ($total_JSON_array as $tab_index => $value) {
             // chercher dans chaque fichier JSON ce champ...
-            if ($value['categorie'] == $categorie && $value['lieu'] == $ville) {
+            if ($value['categorie'] == $categorie && $value['ville'] == $ville) {
                 // si le JSON a la bonne catégorie et la bonne ville
                 array_push($tab_infos, $value[$field]); // stockage de l'information
                 $id_file = $value['id'];
@@ -107,34 +128,50 @@ function find_infos($total_JSON_array, $ville, $categorie) {
 
     $i = 0;
 
-    // lecture du CSV contenant les noms complets des champs d'info
-    $all_fields_name = CSV_file_to_array('./fields.csv', 1);
-    $all_fields_score = CSV_file_to_array('./fields.csv', 2);
+    $field_file = CSV_file_to_array('./fields.csv');
+    // liste des noms complets des champs d'info
+    $all_fields_name = $field_file[1];
+    // liste des scores
+    $all_fields_score = $field_file[2];
 
     foreach ($tab_infos as $tab_index => $value) {
         // pour chaque information stockée
         // générer l'affichage et le score
-        switch ($value) {
-            case true:
-                $fields_view .= '<span class=\'field-color field-color--yes\'></span>';
-                $popover_content .= '<li class=\'list-group-item list-group-item-success\'>' . $all_fields_name[$i] . ' : Oui</li>';
-                $score += $all_fields_score[$i];
-                break;
-            case false:
-                $fields_view .= '<span class=\'field-color field-color--no\'></span>';
-                $popover_content .= '<li class=\'list-group-item list-group-item-danger\'>' . $all_fields_name[$i] . ' : Non</li>';
-                break;
-            default:
-                $fields_view .= '<span class=\'field-color field-color--no-data\'></span>';
-                $popover_content .= '<li class=\'list-group-item list-group-item-dark\'>' . $all_fields_name[$i] . ' : Incertain</li>';
-                break;
+
+        if ($value === "true" || $value === true) {
+            $fields_view .= '<span class=\'field-color field-color--yes\'></span>';
+            $popover_content .= '<li class=\'list-group-item list-group-item-success\'>' . $all_fields_name[$i] . ' : Oui</li>';
+            $score += $all_fields_score[$i];
+        } elseif ($value === "false" || $value === false) {
+            $fields_view .= '<span class=\'field-color field-color--no\'></span>';
+            $popover_content .= '<li class=\'list-group-item list-group-item-danger\'>' . $all_fields_name[$i] . ' : Non</li>';
+        } else {
+            $fields_view .= '<span class=\'field-color field-color--unsure\'></span>';
+            $popover_content .= '<li class=\'list-group-item list-group-item-dark\'>' . $all_fields_name[$i] . ' : Incertain</li>';
         }
 
         $i++;
     }
 
     $html = '<a href="./view.php?view=' . $id_file . '"><div data-toggle="popover" data-trigger="hover" data-placement="right"
-    title="Statistiques" data-content="<ul class=\'list-group || little-list-group\'>' . $popover_content . '<ul>">' . $fields_view . '</div></a>';
+    title="Statistiques" data-content="<ul class=\'list-group || little-list-group\'>' . $popover_content . '</ul> <div class=\'alert alert-primary mt-1\'>Score : ' . $score . '</div>">' . $fields_view . '</div></a>';
 
     return ['HTML' => $html, 'score' => $score];
+}
+
+/**
+ * Pour un fichier JSON entré, génération d'un fichier JSON pour chaque
+ * objet qu'il contient dans le repertoire 'data'
+ * @param string $path Chemin vers le fichier JSON servant à la génération
+ */
+
+function mass_JSON_create($path) {
+    $mass_json_file = JSON_file_to_array($path);
+
+    foreach ($mass_json_file as $key => $json_unit) {
+        if ($json_unit['is_exist'] === "false") {
+            continue;
+        }
+        file_put_contents('./data/' . $json_unit['id'] . '.json', json_encode($json_unit, JSON_UNESCAPED_UNICODE));
+    }
 }
