@@ -41,3 +41,29 @@ h2 {
   min-height: 700px;
   background-image: url('img/bg/bg2.jpg');
 }
+
+.petitbouton {
+  height : 700px;
+}
+
+.colora {
+  background-color: #1B1B2D;
+}
+
+.titre1 {
+  font-size: 60px;
+  text-align: center;
+  font-family: 'Oswald', sans-serif;
+  color: #FFFFFF;
+}
+
+.couleurb {
+  background-color: #1B1B2D !important;
+  border-color: #1B1B2D !important;
+}
+
+.corpsp {
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
+  color : #FFFFFF;
+}
