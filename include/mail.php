@@ -5,6 +5,8 @@ use PHPMailer\PHPMailer\Exception;
 $is_ok = false;
 $consol_msg = 'aucun traitement';
 
+$adresse_reception = 'hello@datactivist.coop';
+
 require '../libs/phpmailer/src/PHPMailer.php';
 require '../libs/phpmailer/src/Exception.php';
 require '../libs/phpmailer/src/SMTP.php';
