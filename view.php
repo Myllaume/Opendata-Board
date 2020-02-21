@@ -36,10 +36,21 @@ $JSON_file = JSON_file_to_array('./data/' . $_GET['view'] . '.json');
 
     <?php
     if (isset($JSON_file['ville']) && !empty($JSON_file['ville'])
+        && isset($JSON_file['departement']) && !empty($JSON_file['departement'])
         && isset($JSON_file['categorie']) && !empty($JSON_file['categorie'])):
     ?>
 
-    <h1><?= $JSON_file['ville'] ?> de <?= $JSON_file['departement'] ?> / <?= $JSON_file['categorie'] ?></h1>
+    <h1><?= $JSON_file['ville'] ?> <small>de <?= $JSON_file['departement'] ?></small><br/><?= $JSON_file['categorie'] ?></h1>
+
+    <?php
+    endif;
+    ?>
+
+    <?php
+    if (isset($JSON_file['date_data_upload']) && !empty($JSON_file['date_data_upload'])):
+    ?>
+
+    <h2>Données mises en ligne le <?= $JSON_file['date_data_upload'] ?></h2>
 
     <?php
     endif;
@@ -48,16 +59,6 @@ $JSON_file = JSON_file_to_array('./data/' . $_GET['view'] . '.json');
     <a href="./index.php" class="btn btn-secondary my-2">Retour à l'accueil</a>
 
     <h2>Description</h2>
-
-    <?php
-    if (isset($JSON_file['remarques']) && !empty($JSON_file['remarques'])):
-    ?>
-
-    <p><?= $JSON_file['remarques'] ?></p>
-
-    <?php
-    endif;
-    ?>
 
     <?php
     if (isset($JSON_file['institution']) && !empty($JSON_file['institution'])):
@@ -89,9 +90,9 @@ $JSON_file = JSON_file_to_array('./data/' . $_GET['view'] . '.json');
         $poppover = 'data-toggle="popover" data-trigger="hover" data-placement="left"
             data-content="' . $all_fields_description[$i] . '"';
 
-        if ($value === "true") {
+        if ($value === "true" || $value === true) {
             echo '<li class="list-group-item list-group-item-success" ' . $poppover . ' >' . $all_fields_name[$i] . ' Oui</li>';
-        } elseif ($value === "false") {
+        } elseif ($value === "false" || $value === false) {
             echo '<li class="list-group-item list-group-item-danger" ' . $poppover . ' >' . $all_fields_name[$i] . ' Non</li>';
         } else {
             echo '<li class="list-group-item list-group-item-dark" ' . $poppover . ' >' . $all_fields_name[$i] . ' Incertain</li>';

@@ -18,33 +18,28 @@ Les fichiers JSON sont nommés tel que `STR_espace_vert.json`, soit
 
 |  Champ |  Type |  Remarque |
 |---|---|---|
-|  annee | `int`  |  Année de la mise à jour la récente |
-|  lieu  |  `string` | Ville concernée par les données |
+|  titre |  `string` |  Identifiant du fichier, strictement égale à son nom : si le fichier s'appelle "STR_espace_vert.json", son identifiant est "STR_espace_vert" |
+|  id |  `string` |  Identifiant du fichier, strictement égale à son nom : si le fichier s'appelle "STR_espace_vert.json", son identifiant est "STR_espace_vert", sans espace, caractères spéciaux etc. |
+|  ville  |  `string` | Ville concernée par les données |
+|  departement  |  `string` | Département de la ville concernée par les données |
 |  categorie |  `string_cat` |  Sujet sur lequel portent les données |
-|  id |  `string` |  Identifiant du fichier, strictement égale à son nom : si le fichier s'appelle "STR_espace_vert.json", son identifiant est "STR_espace_vert" |
 |  data_loc |  `string` |  Adresse où sont disponibles les données |
 |  institution |  `string` |  Organisation, entreprise ou institution, ayant créer le jeu de données |
+|  is_exist |  ``boolean`` |  Si les données existent bien et peuvent donc être indexées |
 |  is_open_licenced |  ``boolean`` |  Si la licene des données est ouverte |
 | is_free  | `boolean`  |  Si l'accès au donnée est gratuit |
 |  is_machine_readabled |  `boolean` |  Si les données peuvent être lues par un logiciel |
 |  is_updated | `boolean`  | Si les données sont à jour  |
 | is_easy_dowloaded  |  `boolean` | Si les données sont faciles à télécharger  |
 | is_public  |  `boolean` | Si tout internaute n'a pas besoin de s'inscrire, de faire de demande et peut accéder immédiatement aux données |
-|  is_numeric | `boolean`  |  Si les données sont numérisées |
 |  is_on_web | `boolean`  | Si les données sont disponible sur une page web et non pas envoyées par courriel  |
-|  remarques | `string`  |  Commentaires supplémentaires sur l'utilité, l'utilisation du set de données |
 |  date_data_upload | `date`  |  Date de mise en ligne des données format `DD-MM-AAAA` |
-|  data_format | `string`  |  Liste des formats de données dédiés au set de données séparés par des virgules |
-|  contributeur | `string`  |  Le prénom et le nom de la personne qui a édité le fichier JSON |
-|  date_last_edit | `date`  |  Date de la dernière édition du fichier JSON au format `DD-MM-AAAA` |
 
-Ecrire `null` dans un champ dont il manque les informations.
+Laisser vide les champs pour lesquels il manque les informations.
 
 ### Conventions de nommage
 
-Les `boolean` peuvent avoir trois valeurs :
-
-Les `string_cat` correspondent aux catégories admises sur le site, selon la liste suivante :
+Les `string_cat` correspondent aux catégories admises sur le site, selon la liste d'exemple suivante :
 
 |  Nom complet |  Notation JSON |
 |---|---|

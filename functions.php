@@ -138,11 +138,11 @@ function find_infos($total_JSON_array, $ville, $categorie) {
         // pour chaque information stockée
         // générer l'affichage et le score
 
-        if ($value === "true") {
+        if ($value === "true" || $value === true) {
             $fields_view .= '<span class=\'field-color field-color--yes\'></span>';
             $popover_content .= '<li class=\'list-group-item list-group-item-success\'>' . $all_fields_name[$i] . ' : Oui</li>';
             $score += $all_fields_score[$i];
-        } elseif ($value === "false") {
+        } elseif ($value === "false" || $value === false) {
             $fields_view .= '<span class=\'field-color field-color--no\'></span>';
             $popover_content .= '<li class=\'list-group-item list-group-item-danger\'>' . $all_fields_name[$i] . ' : Non</li>';
         } else {
