@@ -82,4 +82,9 @@ h2 {
   font-family: 'Montserrat', sans-serif;
   text-align: center;
   color : #FFFFFF;
+  font-size: 20px;
+}
+
+.hamburger{
+  width: 100%;
 }
