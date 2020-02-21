@@ -17,12 +17,14 @@ include_once './functions.php';
 
     <link rel="stylesheet" href="./libs/datatables/datatables.css">
     <link rel="stylesheet" href="./assets/style.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:600|Oswald:600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
     <?php include_once './include/navigation.php'; ?>
-   
+  
     <?php
     // Obtenir le nom de tous les fichiers contenus dans le repertoire 'data'
     $content_repo = get_all_file_names('./data/');
@@ -49,16 +51,17 @@ include_once './functions.php';
     $tab_villes = find_all_keys($all_JSON_content, 'ville');
     ?>
 
-    <h1>Data census France</h1>
-
-    <p><?= count($content_repo); ?> jeux de données analysés pour <?= count($tab_villes); ?> villes.</p>
 
     <div class="cParallaxe">
-      <div class="align-self-center">
-<a href="index.php" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Primary link</a>
+      <div class="d-flex flex-column justify-content-around align-items-center petitbouton">
+        <p class="titre1">Data City census France</p>
+          <a href="index.php" class="btn btn-primary btn-lg active couleurb" role="button" aria-pressed="true">Acceder aux données</a>
+        <p class="corpsp col-md-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       </div>
     </div>
 
+
+    <p><?= count($content_repo); ?> jeux de données analysés pour <?= count($tab_villes); ?> villes.</p>
 
 
     <table class="table" id="tab">
@@ -116,7 +119,7 @@ include_once './functions.php';
             var table = $('#tab').DataTable({
                 paging: false
             });
-            
+
             // calcul et affichage des totaux
             showTotals();
         });
