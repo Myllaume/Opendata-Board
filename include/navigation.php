@@ -12,21 +12,21 @@ $markdown_files = get_all_file_names('./pages/');
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="./index.php">Accueil</a>
             </li>
             <?php 
             foreach ($markdown_files as $key => $file_name):
                 $file_name = substr($file_name, 0, -3);
             ?>
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="./read.php?view=<?= $file_name ?>"><?= ucfirst($file_name) ?></a>
             </li>
             <?php
             endforeach;
             ?>
             <li class="nav-item">
-                <a class="nav-link" href="#">Contact</a>
+                <a class="nav-link" href="./contact.php">Contact</a>
             </li>
         </ul>
     </div>
