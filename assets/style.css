@@ -1,5 +1,6 @@
 h1 {
     margin: 20px 0 30px 0;
+    text-align: center;
 }
 
 h2 {
@@ -9,6 +10,14 @@ h2 {
 .text-rotate {
     writing-mode: vertical-rl;
     transform: rotate(200deg);
+}
+
+.total-col {
+    background-color: rgb(255, 187, 51);
+}
+
+.total-row {
+    background-color: rgb(51, 212, 255);
 }
 
 .sum-cell {
@@ -40,10 +49,11 @@ h2 {
     font-size: 12px;
 }
 
-.total-col {
-    background-color: rgb(255, 187, 51);
-}
-
-.total-row {
-    background-color: rgb(51, 212, 255);
+.cParallaxe {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 700px;
+  background-image: url('img/bg/bg2.jpg');
 }
