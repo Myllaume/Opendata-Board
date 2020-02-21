@@ -9,7 +9,7 @@ include_once './functions.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Datacity - Accueil</title>
+    <title>Opendata Census</title>
 
     <!-- LIBRAIRIES -->
     <link rel="stylesheet" href="./libs/bootstrap/css/bootstrap-reboot.min.css">
@@ -21,32 +21,8 @@ include_once './functions.php';
 
 <body>
 
-   <!-- Navbar -->
-   <nav class="navbar sticky-top navbar-light bg-light">
-        <a class="navbar-brand" href="#">
-            <img src="çaarrive.png" width="30" height="30" class="d-inline-block align-top" alt="logo is comming">
-              Data City census France
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Accueil</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Datasets</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Qui somme-nous ?</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <?php include_once './include/navigation.php'; ?>
+   
     <?php
     // Obtenir le nom de tous les fichiers contenus dans le repertoire 'data'
     $content_repo = get_all_file_names('./data/');
