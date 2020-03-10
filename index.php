@@ -58,7 +58,7 @@ include_once './functions.php';
 
         <button type="button" class="btn btn-dark" onclick="scrollToTable();">Accéder aux données</button>
 
-        <p class="text-intro col-md-5">Analyse de <span class="badge badge-secondary"><?= count($content_repo); ?> jeux de données</span> ouverts portés par <span class="badge badge-secondary"><?= count($tab_villes); ?> communes françaises</span> de plus de 10 000 habitants : Horaires des transports en commun, budget administratif… 15 thématiques sont analysées dans un tableau dynamique donnant une vue d’ensemble sur l’open-data en France.</p>
+        <p class="text-intro col-md-5">Analyse de <span class="badge badge-secondary"><?= count($content_repo); ?> jeux de données</span> ouverts portés par <span class="badge badge-secondary"><?= count($tab_villes); ?> communes françaises</span> de plus de 100 000 habitants : Horaires des transports en commun, budget administratif… 15 thématiques sont analysées dans un tableau dynamique donnant une vue d’ensemble sur l’open-data en France.</p>
       </div>
 
     </div>

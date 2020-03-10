@@ -60,7 +60,7 @@ $JSON_file = JSON_file_to_array('./data/' . $_GET['view'] . '.json');
         endif;
         ?>
 
-        <a href="./index.php" class="btn btn-secondary my-2">Retour à l'accueil</a>
+        <a href="./index.php#tab" class="btn btn-secondary my-2">Retour à l'accueil</a>
 
         <h2>Description</h2>
 
@@ -107,7 +107,16 @@ $JSON_file = JSON_file_to_array('./data/' . $_GET['view'] . '.json');
         ?>
         </ul>
 
+        <?php
+        if (isset($JSON_file['data_loc']) && !empty($JSON_file['data_loc'])):
+        ?>
+
         <a href="<?= $JSON_file['data_loc'] ?>" target="_target" class="btn btn-primary my-2">Accéder aux données</a>
+
+        <?php
+        endif;
+        ?>
+
 
     </main>
 
