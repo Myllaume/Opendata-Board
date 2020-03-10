@@ -11,15 +11,15 @@ function showTotals() {
     
     var index = 0;
     var totalColsCells = $('.total-col');
+    
     var nbRow = 0;
     
     $('.total-row').each(function( rowIndex ) { // pour chaque cellule de total...
         nbRow++;
         var totalCell = $( this );
-    
+
         totalCell.parent().each(function( i ) { //... retrouver la ligne entière...
             var totalRow = 0;
-            // var totalCol = 0;
     
             $( this ).children().each(function( colIndex ) { //... lui prendre chaque cellule...
                 colIndex--;
@@ -38,22 +38,26 @@ function showTotals() {
                         totalColsCells[colIndex].textContent = newColTotal;
                     }
                     
-                    index++;
+
+                    if (cellNumber !='') {
+                        index++; // on ne comptabilise la cellule que si elle contient quelque chose
+                    }
                 }
+
+                // pourcentage de "true" sur les jeux de données renseignés
+                var moyenneParLigne = totalRow / index;
+                
+                if ($( this ).hasClass('total-open-row')) {
+                    // s'il s'agit bien de la cellule de taux d'ouverture
+                    // on affiche 'moyenneParLigne'
+                    $( this ).text(moyenneParLigne.toFixed(2));
+                }
+
+                totalCell.text(totalRow); // afficher le total dans la cellule de total.
+                // donner une couleur à la cellule par rapport à sa moyenne
+                totalCell.css('background-color', 'rgba(51, 212, 255, ' + moyenneParLigne / 100 + ')');
             })
     
-            totalCell.text(totalRow); // afficher le total dans la cellule de total.
-            var moyenneParLigne = totalRow / index; // cacluler une moyenne des totaux
-    
-            // donner une couleur à la cellule par rapport à sa moyenne
-            totalCell.css('background-color', 'rgba(51, 212, 255, ' + moyenneParLigne / 100 + ')');
-            // afficher un Popover pour indiquer le moyenne au survol des totaux par ligne
-            totalCell.popover({
-                title: 'Moyenne',
-                content: moyenneParLigne.toFixed(2) + ' sur 100',
-                trigger: 'hover',
-                placement: 'left'
-            });
 
             index = 0;
         })

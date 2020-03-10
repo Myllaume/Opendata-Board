@@ -21,14 +21,6 @@ h2 {
     transform: rotate(180deg);
 }
 
-.total-col {
-    background-color: rgb(255, 187, 51);
-}
-
-.total-row {
-    background-color: rgb(51, 212, 255);
-}
-
 .sum-cell {
     font-size: 0px;
     padding: 2px !important;

@@ -71,6 +71,7 @@ include_once './functions.php';
                 <th><span class="text-rotate"><?= $categorie ?></span></th>
                 <?php endforeach; ?>
                 <th>Total</th>
+                <th>Taux<br/>d'ouverture</th>
             </tr>
         </thead>
         <tbody>
@@ -87,6 +88,7 @@ include_once './functions.php';
                 </td>
                 <?php endforeach; ?>
                 <th class="total-row">0</th>
+                <th class="total-open-row">0</th>
             </tr>
             <?php endforeach; ?>
         </tbody>
